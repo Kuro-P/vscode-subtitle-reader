@@ -93,8 +93,8 @@ export function openPreviewPanel(fileName: string, context: vscode.ExtensionCont
   try {
     fsPromises.readFile(path.join(_extensionPath, '/src/assets/index.html'), { encoding: 'utf-8' }).then((panelTempl) => {
 
-      const styleUri = webviewPanel.webview.asWebviewUri(vscode.Uri.joinPath(_extensionUri, 'src/assets', 'main.css'));
-      const scriptUri = webviewPanel.webview.asWebviewUri(vscode.Uri.joinPath(_extensionUri, 'src/assets', 'main.js'));
+      const styleUri = webviewPanel.webview.asWebviewUri(vscode.Uri.joinPath(_extensionUri, 'out', 'main.css'));
+      const scriptUri = webviewPanel.webview.asWebviewUri(vscode.Uri.joinPath(_extensionUri, 'out', 'main.js'));
 
       const panelParams = Object.assign({}, contentInstance, {
         fileName,

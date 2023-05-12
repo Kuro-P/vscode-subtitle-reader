@@ -1,0 +1,110 @@
+{
+  "name": "subtitle-reader",
+  "displayName": "subtitle-reader",
+  "description": "A tool for enhance the reading experience of subtitle files.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.78.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Formatters",
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:ssa",
+    "onLanguage:aas",
+    "onLanguage:srt",
+    "onCommand:markdown.extension.printToHtmlBatch",
+    "workspaceContains:*.(ass|ssa|srt)"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "subtitleReader.helloFile",
+        "title": "Hello File"
+      },
+      {
+        "command": "subtitleReader.helloFolder",
+        "title": "Hello Folder"
+      },
+      {
+        "command": "subtitleReader.showPreviewPanel",
+        "title": "Hello preview"
+      }
+    ],
+    "languages": [
+      {
+        "id": "ass",
+        "aliases": [
+          "ASS",
+          "SSA"
+        ],
+        "extensions": [
+          ".ass",
+          ".ssa"
+        ],
+        "filenames": [],
+        "mimetypes": [],
+        "configuration": "./syntaxes/language-configuration.json",
+        "icon": {
+          "light": "./icons/ass-icon.svg",
+          "dark": "./icons/ass-icon.svg"
+        }
+      },
+      {
+        "id": "srt",
+        "aliases": [
+          "SubRip"
+        ],
+        "extensions": [
+          ".srt"
+        ],
+        "filenames": [],
+        "mimetypes": [
+          "text/x-srt"
+        ],
+        "configuration": "./syntaxes/language-configuration.json",
+        "icon": {
+          "light": "./icons/srt-icon.svg",
+          "dark": "./icons/srt-icon.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "ass",
+        "scopeName": "source.ass",
+        "path": "./syntaxes/ass.tmLanguage.json"
+      },
+      {
+        "language": "srt",
+        "scopeName": "source.subrip",
+        "path": "./syntaxes/srt.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.78.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "@vscode/test-electron": "^2.3.0",
+    "eslint": "^8.39.0",
+    "glob": "^8.1.0",
+    "handlebars": "^4.7.7",
+    "mocha": "^10.2.0",
+    "typescript": "^5.0.4"
+  }
+}

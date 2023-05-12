@@ -1,6 +1,6 @@
 # vscode-subtitle-reader
 
-A tool for better subtitle files reading experience in VS Code.
+A tool for enhance the reading experience of subtitle files..
 
 ## Features
 * syntaxes highlight (`.ass`, `.ssa`, `.srt`) 
@@ -12,4 +12,3 @@ A tool for better subtitle files reading experience in VS Code.
 - [ ] [preview panel] pannel position setting
 - [ ] [preview panel] sync content when actived document changed
 - [ ] [preview panel] and more 🤯....
-

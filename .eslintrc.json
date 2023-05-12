@@ -1,0 +1,87 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "@typescript-eslint/naming-convention": "warn",
+        "@typescript-eslint/semi": "warn",
+        "curly": "warn",
+        "eqeqeq": "warn",
+        "no-throw-literal": "warn",
+        "semi": "off",
+        "array-bracket-spacing": [
+          "warn",
+          "always",
+          {
+            "singleValue": true
+          }
+        ],
+        "array-bracket-newline": [
+          "warn",
+          {
+            "multiline": true,
+            "minItems": 5
+          }
+        ],
+        "arrow-spacing": [
+          "warn", 
+          {
+            "before": true,
+            "after": true
+          }
+        ],
+        "block-spacing": [
+          "warn",
+          "always"
+        ],
+        "max-statements-per-line": [
+          "warn",
+          {
+            "max": 2
+          }
+        ],
+        "newline-per-chained-call": [
+          "warn",
+          {
+            "ignoreChainWithDepth": 3
+          }
+        ],
+        "object-property-newline": "warn",
+        "space-before-blocks": [
+          "warn",
+          "always"
+        ],
+        "object-curly-spacing": [
+          "warn",
+          "always"
+      
+        ],
+        "no-multi-spaces": [
+          "warn",
+          {
+            "ignoreEOLComments": true
+          }
+        ],
+        "no-trailing-spaces": [
+          "warn",
+          {
+            "ignoreComments": true
+          }
+        ],
+        "eol-last": [
+          "warn",
+          "always"
+        ]
+    },
+    "ignorePatterns": [
+        "out",
+        "dist",
+        "**/*.d.ts"
+    ]
+}

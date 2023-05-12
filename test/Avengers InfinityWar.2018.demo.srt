@@ -1,0 +1,521 @@
+1
+00:00:00,760 --> 00:00:10,430
+远鉴字幕组&Orange字幕组联合制作
+[Visionary] 0day-sub
+
+2
+00:00:05,460 --> 00:00:08,460
+喷火腚 try Arthur BoxEr Zero Ren
+
+3
+00:00:05,460 --> 00:00:11,460
+{\pos(315,558.137)}翻译：
+
+4
+00:00:08,460 --> 00:00:11,460
+橙味的六元 丛林的鱼 Edawn Shawn-LXH
+
+5
+00:00:11,460 --> 00:00:13,460
+{\pos(435,723.63)}翻译：
+
+6
+00:00:11,460 --> 00:00:13,460
+Emma 复联3哭声担当 胡帅颖
+
+7
+00:00:13,460 --> 00:00:16,460
+{\pos(438,722.008)}翻译：
+
+8
+00:00:13,460 --> 00:00:16,460
+胡帅颖 Jaime_Jamie 基吉星团
+
+9
+00:00:16,460 --> 00:00:19,460
+{\pos(558,722.008)}翻译：
+
+10
+00:00:16,460 --> 00:00:19,460
+没十斤公爵 青青 小白
+
+11
+00:00:19,460 --> 00:00:22,460
+{\pos(435,699.292)}校对：
+
+12
+00:00:19,460 --> 00:00:22,460
+william2568 rix 基吉星团 我问这瓜保熟么
+
+13
+00:00:22,460 --> 00:00:25,460
+{\pos(454.5,694.426)}翻译：
+
+14
+00:00:22,460 --> 00:00:25,460
+Jeffers Rebecca Comet 阿茴 越天然 坎坎
+
+15
+00:00:25,460 --> 00:00:28,320
+{\pos(297,627.104)}彩蛋制作：
+
+16
+00:00:25,460 --> 00:00:28,320
+基吉星团 复联3哭声担当 try 钦腾Simon
+特效校对翻译与更改：钦腾Simon
+
+17
+00:00:26,390 --> 00:00:28,320
+这是阿斯加德
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}This is the Asgardian{\r}
+
+18
+00:00:28,320 --> 00:00:30,790
+{\pos(936,756.746)}难民船领袖号飞船
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}refugee vessel Statesman.{\r}
+
+19
+00:00:28,460 --> 00:00:31,460
+{\fs45.738\pos(942,633.134)}热门电影字幕欢迎关注微博 @远鉴字幕组v
+远鉴字幕组招新群 483552098 诚邀您的加入
+
+20
+00:00:32,530 --> 00:00:36,530
+{\fad(300,0)\fs292.048\frz20\fry20\frx20\t(0.6,\fs162.25\frz0\fry0\frx0)\move(1800,778.796,975,730.12)}美国漫威电影工作室出品
+
+21
+00:00:33,490 --> 00:00:34,790
+{\pos(997.5,120.597)}我们受到了攻击
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}We are under assault.{\r}
+
+22
+00:00:34,800 --> 00:00:37,190
+{\pos(1000.5,128.134)}重复 我们受到了攻击
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}I repeat, we are under assault.{\r}
+
+23
+00:00:36,530 --> 00:00:39,670
+{\fad(0,0)\fs162.25\t(0.6,\fs113.574)\move(975,730.12,945,665.221)}美国漫威电影工作室出品
+
+24
+00:00:37,200 --> 00:00:39,670
+致敬漫威电影宇宙诞辰10周年
+
+25
+00:00:37,200 --> 00:00:40,760
+{\pos(967.5,202)}引擎受损 生命保障系统失灵
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}The engines are dead, life support failing.{\r}
+
+26
+00:00:39,670 --> 00:00:43,660
+{\fad(0,2000)\fs113.574\c&HFFFFFF&\t(0.6,\fs97.349\c&H0000FF&)\move(945,665.221,945,648.996)}美国漫威电影工作室出品
+
+27
+00:00:40,770 --> 00:00:44,070
+请求范围内任何船只的支援
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}Requesting aid from any vessel within range.{\r}
+
+28
+00:00:43,240 --> 00:00:45,240
+据传这段求救录音是雷神1的导演配音的
+
+29
+00:00:44,070 --> 00:00:48,070
+我们目前位于距阿斯加德22跳跃点的位置
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}We are 22 jump points out of Asgard.{\r}
+
+30
+00:00:48,070 --> 00:00:50,640
+我们的船员都是阿斯加德民众
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}Our crew is made up of Asgardian families.{\r}
+
+31
+00:00:50,640 --> 00:00:52,380
+士兵寥寥无几
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}We have very few soldiers here.{\r}
+
+32
+00:00:52,380 --> 00:00:54,340
+这不是战舰
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}This is not a warcraft.{\r}
+
+33
+00:00:54,350 --> 00:00:56,350
+重复 这不是战舰
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}I repeat, this is not a warcraft.{\r}
+
+34
+00:01:02,760 --> 00:01:07,760
+雷神3里出逃的阿斯加德人民全灭，已经夺得力量宝石的灭霸攻击雷神和洛
+基所在的阿斯嘉德飞船 船只破损 海姆达尔重伤 锤基也无能为力
+
+35
+00:01:09,730 --> 00:01:12,730
+听我说 你们该感到欣喜
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}Hear me and rejoice.{\r}
+
+36
+00:01:16,570 --> 00:01:18,840
+伟大的泰坦星人拯救了你们
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}You have had the privilege{\r}
+
+37
+00:01:18,840 --> 00:01:21,570
+这是无上的光荣
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}of being saved by the Great Titan.{\r}
+
+38
+00:01:24,540 --> 00:01:26,710
+你们或许认为这是受苦
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}You may think this is suffering.{\r}
+
+39
+00:01:27,880 --> 00:01:29,080
+错
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}No.{\r}
+
+40
+00:01:30,110 --> 00:01:32,380
+这是救赎
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}It is salvation.{\r}
+
+41
+00:01:36,290 --> 00:01:40,120
+万物的天平
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}Universal scales tip toward balance{\r}
+
+42
+00:01:40,120 --> 00:01:41,730
+因你们的牺牲而平衡
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}because of your sacrifice.{\r}
+
+43
+00:01:43,430 --> 00:01:44,830
+微笑吧
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}Smile.{\r}
+
+44
+00:01:46,160 --> 00:01:48,300
+{\pos(340.5,785.388)}生是灭霸的人
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}For even in death,{\r}
+
+45
+00:01:48,300 --> 00:01:50,670
+死注定也与灭霸同在
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}you have become Children of Thanos.{\r}
+
+46
+00:02:06,220 --> 00:02:08,250
+我知道失败的滋味
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}I know what it's like to lose.{\r}
+
+47
+00:02:10,390 --> 00:02:13,360
+对胜利还抱有那么一点渺小之望
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}To feel so desperately that you're right...{\r}
+
+48
+00:02:14,160 --> 00:02:16,760
+却还是输了
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}yet to fail, nonetheless.{\r}
+
+49
+00:02:24,840 --> 00:02:26,540
+当恐惧
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}It's frightening.{\r}
+
+50
+00:02:27,810 --> 00:02:29,770
+使你两腿发软
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}Turns the legs to jelly.{\r}
+
+51
+00:02:31,880 --> 00:02:34,180
+我问你什么时候才到头啊
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}But I ask you, to what end?{\r}
+
+52
+00:02:35,510 --> 00:02:38,180
+就靠害怕或是逃避
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}Dread it, run from it...{\r}
+
+53
+00:02:39,220 --> 00:02:41,650
+命运还是会到来的
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}destiny arrives all the same.{\r}
+
+54
+00:02:42,820 --> 00:02:44,690
+{\pos(1221,803.478)}就在这里 就在此刻间
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}And now, it's here.{\r}
+
+55
+00:02:45,360 --> 00:02:47,220
+{\pos(1218,798.955)}或者我应该说
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}Or should I say...{\r}
+
+56
+00:02:48,490 --> 00:02:50,130
+{\pos(748.5,801.97)}我就是命运的终结者
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}I am.{\r}
+
+57
+00:02:55,430 --> 00:02:56,740
+你话太多了
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}You talk too much.{\r}
+
+58
+00:02:57,970 --> 00:02:59,830
+{\pos(1489.5,795.94)}交出宇宙魔方
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}The Tesseract.{\r}
+
+59
+00:02:59,840 --> 00:03:02,140
+{\pos(484.5,800.463)}不然就要你哥哥的命
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}Or your brother's head.{\r}
+
+60
+00:03:06,680 --> 00:03:09,180
+{\pos(1410,798.955)}我猜你心里应该有个数了吧
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}I assume you have a preference.{\r}
+
+61
+00:03:10,380 --> 00:03:11,680
+{\pos(543,804.985)}是的
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}Oh, I do.{\r}
+
+62
+00:03:13,950 --> 00:03:15,150
+{\pos(1423.5,804.985)}尽管杀了吧
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}Kill away.{\r}
+
+63
+00:03:30,400 --> 00:03:31,470
+{\pos(636,804.985)}停下 我招
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}All right, stop!{\r}
+
+64
+00:03:34,940 --> 00:03:37,240
+魔方没在我们手上
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}We don't have the Tesseract.{\r}
+
+65
+00:03:37,240 --> 00:03:38,880
+它同阿斯加德一起毁灭了
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}It was destroyed on Asgard.{\r}
+
+66
+00:03:49,750 --> 00:03:52,620
+我怎么会有你这样的弟弟
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}You really are the worst brother.{\r}
+
+67
+00:03:57,700 --> 00:03:59,730
+我向你保证 哥哥
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}I assure you, brother...{\r}
+
+68
+00:03:59,730 --> 00:04:01,800
+{\pos(607.5,800.463)}我们会没事的
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}the sun will shine on us again.{\r}
+
+69
+00:04:03,670 --> 00:04:06,940
+你真是盲目乐观 阿斯加德人
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}Your optimism is misplaced, Asgardian.{\r}
+
+70
+00:04:06,940 --> 00:04:11,040
+{\pos(379.5,804.985)}有一点我得说清楚
+我不是阿斯加德人
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}Well, for one thing, I'm not Asgardian.{\r}
+
+71
+00:04:11,040 --> 00:04:12,240
+{\pos(1504.5,803.478)}还有一点...
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}And for another...{\r}
+
+72
+00:04:14,610 --> 00:04:15,840
+{\pos(1117.5,795.94)}我们有浩克
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}we have a Hulk.{\r}
+
+73
+00:04:27,060 --> 00:04:29,830
+先让他耍两手
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}Let him have his fun.{\r}
+
+74
+00:05:22,080 --> 00:05:23,650
+请求先祖们
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}Allfathers...{\r}
+
+75
+00:05:25,550 --> 00:05:28,750
+让黑暗魔法流过我身
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}let the dark magic flow through me one last...{\r}
+
+76
+00:05:29,620 --> 00:05:30,690
+最后一次吧
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}time.{\r}
+
+77
+00:05:45,540 --> 00:05:46,940
+你那样做真愚蠢
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}That was a mistake.{\r}
+
+78
+00:05:52,840 --> 00:05:54,580
+不要
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}No!{\r}
+
+79
+00:06:03,690 --> 00:06:06,390
+你终会为此血债血偿的
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}You're going to die for that.{\r}
+
+80
+00:06:17,600 --> 00:06:19,400
+以吾卑微之躯
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}My humble personage...{\r}
+
+81
+00:06:20,740 --> 00:06:22,970
+臣服于您的伟大高贵
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}bows before your grandeur.{\r}
+
+82
+00:06:26,410 --> 00:06:29,910
+从来没有人 具有如此力量
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}No other being has ever had the might...{\r}
+
+83
+00:06:29,910 --> 00:06:31,950
+或如此的威势
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}nay, the nobility...{\r}
+
+84
+00:06:31,950 --> 00:06:36,720
+能够拿到两块宝石 而不仅仅只是一块
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}to wield not one, but two Infinity Stones.{\r}
+
+85
+00:06:40,090 --> 00:06:44,630
+整个宇宙都在您的掌握之中
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}The universe lies within your grasp.{\r}
+
+86
+00:07:23,830 --> 00:07:26,640
+还有两枚宝石在地球上
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}There are two more stones on Earth.{\r}
+
+87
+00:07:28,000 --> 00:07:31,840
+孩子们 找到并把它们带回泰坦星来
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}Find them, my children, and bring them to me on Titan.{\r}
+
+88
+00:07:31,840 --> 00:07:33,510
+我们不会让您失望的 父亲
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}Father, we will not fail you.{\r}
+
+89
+00:07:33,510 --> 00:07:36,040
+请让我插句话
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}If I might interject.{\r}
+
+90
+00:07:36,050 --> 00:07:40,220
+如果你们要去地球 最好带上一个向导
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}If you're going to Earth, you might want a guide.{\r}
+
+91
+00:07:40,220 --> 00:07:43,050
+我对那里还有点经验
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}I do have a bit of experience in that arena.{\r}
+
+92
+00:07:43,050 --> 00:07:45,550
+{\pos(717,801.97)}你真连失败都当成是经验
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}If you consider failure experience.{\r}
+
+93
+00:07:45,560 --> 00:07:48,160
+我认为经验不是水到渠成的
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}I consider experience experience.{\r}
+
+94
+00:07:49,530 --> 00:07:51,160
+灭霸大人
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}Almighty Thanos...{\r}
+
+95
+00:07:51,160 --> 00:07:55,900
+{\pos(1437,801.97)}我 洛基 阿斯加德的王子
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}I, Loki, prince of Asgard...{\r}
+
+96
+00:07:59,740 --> 00:08:00,900
+奥丁之子
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}Odinson...{\r}
+
+97
+00:08:04,840 --> 00:08:06,780
+{\pos(589.5,800.463)}约特海姆巨人国的正统国王
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}the rightful king of Jotunheim...{\r}
+
+98
+00:08:07,280 --> 00:08:09,180
+诡计之神
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}god of mischief...{\r}
+
+99
+00:08:10,080 --> 00:08:11,680
+起誓效忠于您
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}do hereby pledge to you...{\r}
+
+100
+00:08:13,020 --> 00:08:16,920
+{\pos(714,804.985)}献上我对您不死的忠诚
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}my undying fidelity.{\r}
+
+101
+00:08:27,560 --> 00:08:28,970
+{\pos(1251,803.478)}不死的
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}Undying?{\r}
+
+102
+00:08:32,800 --> 00:08:35,970
+{\pos(1321.5,792.925)}你说话可小点心吧
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}You should choose your words more carefully.{\r}
+
+103
+00:08:56,960 --> 00:08:57,960
+{\pos(1089,797.448)}你...
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}You...{\r}
+
+104
+00:08:59,060 --> 00:09:00,730
+{\pos(1041,803.478)}永远不会成为...
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}will never be...{\r}
+
+105
+00:09:03,300 --> 00:09:04,600
+{\pos(1110,803.478)}一个真正的神的
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}a god.{\r}
+
+106
+00:09:14,840 --> 00:09:15,840
+不
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}No!{\r}
+
+107
+00:09:30,830 --> 00:09:33,230
+{\pos(1521,791.418)}这次不会再有什么假死的把戏了
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}No resurrections this time.{\r}
+
+108
+00:09:56,920 --> 00:09:59,050
+不 洛基
+{\fnCronosPro-SubhIt\fs52.761\1c&H65CDD1&}No. Loki.{\r}

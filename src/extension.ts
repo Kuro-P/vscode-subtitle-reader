@@ -6,7 +6,7 @@ export function activate(context: vscode.ExtensionContext) {
 	console.log('Congratulations, your extension "helloVscode" is now active!');
 
 	let openFile = vscode.commands.registerCommand('subtitleReader.helloFile', () => {
-		vscode.window.showErrorMessage('Hello World from VS Code');
+		vscode.window.showErrorMessage('Hello File xixixi from VS Code');
 
 		vscode.workspace.openTextDocument(path.join(context.extensionPath, '/test/kiana.ass')).then(doc => {
 			vscode.window.showTextDocument(doc);

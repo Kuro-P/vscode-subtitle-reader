@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { isSSA, isASS, isSRT, getNonce } from '../common/utils';
 import * as path from 'path';
-import * as fsPromises from 'fs/promises';
+import { promises as fsPromises } from "fs";
 import { extractAssInfo } from './ass';
 import { extractSrtInfo } from './srt';
 import * as Handlebars from 'handlebars';
@@ -93,8 +93,8 @@ export function openPreviewPanel(fileName: string, context: vscode.ExtensionCont
   try {
     fsPromises.readFile(path.join(_extensionPath, '/src/assets/index.html'), { encoding: 'utf-8' }).then((panelTempl) => {
 
-      const styleUri = webviewPanel.webview.asWebviewUri(vscode.Uri.joinPath(_extensionUri, 'out', 'main.css'));
-      const scriptUri = webviewPanel.webview.asWebviewUri(vscode.Uri.joinPath(_extensionUri, 'out', 'main.js'));
+      const styleUri = webviewPanel.webview.asWebviewUri(vscode.Uri.joinPath(_extensionUri, 'dist', 'main.css'));
+      const scriptUri = webviewPanel.webview.asWebviewUri(vscode.Uri.joinPath(_extensionUri, 'dist', 'main.js'));
 
       const panelParams = Object.assign({}, contentInstance, {
         fileName,

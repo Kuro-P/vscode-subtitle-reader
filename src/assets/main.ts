@@ -1,3 +1,3 @@
 import './main.scss';
 
-console.info('hello preview js');
+console.info('hello preview js xixixi');

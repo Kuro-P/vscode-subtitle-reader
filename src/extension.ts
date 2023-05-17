@@ -1,18 +1,22 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
-import { processContent } from './preview';
+import { displayPreviewPanel } from './preview';
 
-export function activate(context: vscode.ExtensionContext) {
+export let context: vscode.ExtensionContext;
+
+export function activate(c: vscode.ExtensionContext) {
+	context = c;
 	console.log('Congratulations, your extension "helloVscode" is now active!');
 
+	// open file
 	let openFile = vscode.commands.registerCommand('subtitleReader.helloFile', () => {
-		vscode.window.showErrorMessage('Hello World from VS Code');
-
-		vscode.workspace.openTextDocument(path.join(context.extensionPath, '/test/kiana.ass')).then(doc => {
+		vscode.window.showErrorMessage('Hello File xixixi from VS Code');
+		vscode.workspace.openTextDocument(path.join(context.extensionPath, '/test/Tags.ass')).then(doc => {
 			vscode.window.showTextDocument(doc);
 		});
 	});
 
+	// openFolder
 	let openFolder = vscode.commands.registerCommand('subtitleReader.helloFolder', () => {
 		const folderPath = path.join(context.extensionPath, '/test');
 		const folderPathParsed = folderPath.split(`\\`).join(`/`);
@@ -22,9 +26,11 @@ export function activate(context: vscode.ExtensionContext) {
 	});
 
 	let showPreview = vscode.commands.registerCommand('subtitleReader.showPreviewPanel', () => {
+		console.log('vscode.window.state', vscode.window.state);
+
 		const textEditor = vscode.window.activeTextEditor;
 		if (textEditor) {
-			processContent(textEditor.document, context);
+			displayPreviewPanel();
 		} else {
 			vscode.window.showErrorMessage('Not found activated tab');
 		}

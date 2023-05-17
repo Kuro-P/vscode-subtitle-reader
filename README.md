@@ -6,6 +6,12 @@ A tool for enhance the reading experience of subtitle files..
 * syntaxes highlight (`.ass`, `.ssa`, `.srt`) 
 * support preview pannel (like markdown all in one)
 
+## Develop
+```
+yarn dev
+```
+Click `Run and debug` button on sider bar, select `Run Extension` Option and run, it will open an debug window.
+
 ## TODO
 - [ ] [preview panel] file pagination
 - [ ] [preview panel] content layout and style

@@ -1,7 +1,5 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const { SRC_DIR, DIST_DIR } = require('./const');
 const { compileCallbackPlugin } = require('./plugin');
 
@@ -17,16 +15,16 @@ const extensionConfig = {
     ignored: /node_modules/
   },
   node: {
-    __dirname: false // leave the __dirname-behaviour intact
+    __dirname: true, // leave the __dirname-behaviour intact
+    __filename: true
   },
   entry: {
     extension: path.join(SRC_DIR, 'extension.ts')
   },
-  mode: 'none',
+  mode,
   stats: 'normal',
   externals: {
     'vscode': 'commonjs vscode', // ignored because it doesn't exist
-    // "vscode-extension-telemetry": 'commonjs vscode-extension-telemetry', // commonly used
   },
   output: {
     filename: '[name].js',
@@ -68,14 +66,7 @@ const extensionConfig = {
         }
       },
     ]
-  },
-  // optimization: {
-  //   minimizer: [
-  //     new TerserPlugin({
-  //       extractComments: false,
-  //     }),
-  //   ]
-  // },
+  }
 };
 
 
@@ -89,7 +80,7 @@ const webConfig = {
     poll: true,
     ignored: /node_modules/
   },
-  mode: 'none',
+  mode,
   stats: 'normal',
   devtool: isDev ? 'eval-cheap-source-map' : false,
   output: {
@@ -195,20 +186,9 @@ const webConfig = {
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
-    // new CleanWebpackPlugin(),
     new compileCallbackPlugin()
   ],
-  // optimization: {
-  //   minimizer: [
-  //     new TerserPlugin({
-  //       extractComments: false,
-  //     }),
-  //   ]
-  // },
 };
 
-module.exports = [
-  // webConfig,
-  extensionConfig,
-  webConfig
-];
+
+module.exports = [ extensionConfig, webConfig ];

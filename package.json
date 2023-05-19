@@ -83,7 +83,68 @@
         "scopeName": "source.subrip",
         "path": "./syntaxes/srt.tmLanguage.json"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Subtitle Reader",
+      "properties": {
+        "subtitleReader.autoOpen": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically open the reader panel when an subtitle (.ass, .srt) file is opened.",
+          "scope": "resource"
+        },
+        "subtitleReader.autoClose": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically close the reader panel when this subtitle files is closed.",
+          "scope": "resource"
+        },
+        "subtitleReader.style": {
+          "type": "object",
+          "description": "Custom style for the reader pannel.",
+          "additionalProperties": false,
+          "properties": {
+            "html": {
+              "type": "object",
+              "description": "Custom style for the html element.",
+              "properties": {
+                "background": {
+                  "type": "string"
+                },
+                "background-position": {
+                  "type": "string"
+                },
+                "background-image": {
+                  "type": "string"
+                },
+                "background-size": {
+                  "type": "string"
+                },
+                "background-repeat": {
+                  "type": "string",
+                  "enum": [
+                    "space",
+                    "round",
+                    "repeat-y",
+                    "repeat-x",
+                    "repeat no-repeat",
+                    "no-repeat repeat",
+                    "no-repeat"
+                  ]
+                },
+                "margin": {
+                  "type": "string"
+                },
+                "padding": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "scope": "resource"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",

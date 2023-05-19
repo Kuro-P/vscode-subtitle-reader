@@ -15,6 +15,7 @@ Click `Run and debug` button on sider bar, select `Run Extension` Option and run
 ## TODO
 - [ ] [preview panel] file pagination
 - [ ] [preview panel] content layout and style
-- [ ] [preview panel] pannel position setting
+- [ ] [preview panel] panel position setting
+- [ ] [preview panel] panel style setting
 - [ ] [preview panel] sync content when actived document changed
 - [ ] [preview panel] and more 🤯....

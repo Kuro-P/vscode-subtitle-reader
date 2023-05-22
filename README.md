@@ -4,7 +4,7 @@ A tool for enhance the reading experience of subtitle files..
 
 ## Features
 * syntaxes highlight (`.ass`, `.ssa`, `.srt`) 
-* support preview pannel (like markdown all in one)
+* support preview panel (like markdown all in one)
 
 ## Develop
 ```

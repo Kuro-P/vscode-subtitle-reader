@@ -31,20 +31,22 @@ export function activate(c: vscode.ExtensionContext) {
 
 	const showPreview = vscode.commands.registerCommand('subtitleReader.showPreviewPanel', async () => {
 		const textEditor = vscode.window.activeTextEditor
-		if (textEditor) {
-			const panelName = getFileName(textEditor.document.fileName)
-			const panel = await displayPreviewPanel({
-				viewType: panelName,
-				title: panelName
-			})
-
-			// TODO if (panel.fileUri in tab.groups) { renderWithStoredDada }
-
-			state.addPanel(panel)
-
-		} else {
-			vscode.window.showErrorMessage('Not found activated tab')
+		if (!textEditor) {
+			return vscode.window.showErrorMessage('Not found activated tab')
 		}
+
+		const cachePanel = state.getPanel()
+		const panelName = getFileName(textEditor.document.fileName)
+		const panel = await displayPreviewPanel(cachePanel, {
+			viewType: panelName,
+			title: panelName
+		})
+
+		!cachePanel && state.setPanel(panel)
+
+		// TODO if (panel.fileUri in tab.groups) { renderWithStoredDada }
+
+		// TODO set state to vscode context
 	})
 
 

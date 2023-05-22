@@ -45,6 +45,13 @@ class Panel implements PanelInstance {
     this.webviewPanel.dispose()
   }
 
+  onDidDispose(fn: Function) {
+    this.webviewPanel.onDidDispose(() => {
+      fn()
+      console.log('webview instance onDidDispose')
+    })
+  }
+
 }
 
 export { Panel, PanelInstance }

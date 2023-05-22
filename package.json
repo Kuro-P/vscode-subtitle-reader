@@ -101,7 +101,7 @@
         },
         "subtitleReader.style": {
           "type": "object",
-          "description": "Custom style for the reader pannel.",
+          "description": "Custom style for the reader panel.",
           "additionalProperties": false,
           "properties": {
             "html": {

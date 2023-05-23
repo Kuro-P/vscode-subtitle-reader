@@ -2,27 +2,57 @@ body {
   background: rgb(56, 73, 53);
 }
 
-.dialogue {
-  border: 1px solid sandybrown;
-  margin: 10px 0;
-  padding: 0 10px;
-  display: flex;
-  .time {
-    padding-right: 10px;
-    margin-right: 10px;
-    border-right: 1px solid sandybrown;
-    font-size: 15px;
+.title {
+  font-size: 16px;
+  background: darkcyan;
+}
+
+.content {
+  .dialogue {
+    border: 1px solid sandybrown;
+    margin: 10px 0;
+    padding: 0 10px;
+    display: flex;
+    .time {
+      width: 190px;
+      text-align: center;
+      padding-right: 10px;
+      margin-right: 10px;
+      border-right: 1px solid sandybrown;
+      font-size: 15px;
+      white-space: break-spaces;
+    }
+    .text {
+      color: #bdf36a;
+    }
   }
-  .text {
-    color: #bdf36a;
-    .primary-text {
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
-    .subsidiary-text {
-      font-size: 14px;
-      color: #c0de9b;
-      margin-top: 10px;
-    }
+}
+
+%primary-text {
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+%subsidiary-text {
+  font-size: 13px;
+  color: #c0de9b;
+  margin: 8px 0;
+}
+
+.content[data-lang-primary="primary"] {
+  .primary-text {
+    @extend %primary-text;
+  }
+  .subsidiary-text {
+    @extend %subsidiary-text;
+  }
+}
+
+.content[data-lang-primary="subsidiary"] {
+  .primary-text {
+    @extend %subsidiary-text;
+  }
+  .subsidiary-text {
+    @extend %primary-text;
   }
 }

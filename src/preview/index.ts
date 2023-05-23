@@ -6,7 +6,7 @@ import { extractAssInfo } from './ass'
 import { extractSrtInfo } from './srt'
 import * as Handlebars from 'handlebars'
 import { Panel } from './panel'
-import { context } from './../extension'
+import { context, state } from './../extension'
 
 export let panel: Panel
 
@@ -32,7 +32,7 @@ export async function displayPreviewPanel(panel?: Panel, options?: PanelOptions)
 export function createPreviewPanel(options?: PanelOptions): vscode.WebviewPanel {
 
   const {
-    viewType = "subtitlePreview",
+    viewType = "subtitlePreviewPanel",
     title = "Subtitle preview panel",
     viewColumn = vscode.ViewColumn.Beside,
     localResourceRoots = [ context.extensionUri ]
@@ -51,7 +51,7 @@ export function createPreviewPanel(options?: PanelOptions): vscode.WebviewPanel 
       enableCommandUris: false,
       enableScripts: true,
       enableFindWidget: true,
-      retainContextWhenHidden: true,
+      retainContextWhenHidden: false,
       localResourceRoots: localResourceRoots
     }
   )
@@ -91,8 +91,8 @@ export async function generateHTML(webviewPanel: vscode.WebviewPanel): Promise<s
       fileName,
       styleUri: styleUri,
       scriptUri: scriptUri,
-      cspSource: webviewPanel.webview.cspSource,
-      nonce: getNonce(),
+      // cspSource: webviewPanel.webview.cspSource,
+      // nonce: getNonce(),
     })
 
     const template = Handlebars.compile(panelTempl)

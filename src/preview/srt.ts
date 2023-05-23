@@ -41,7 +41,6 @@ export function extractSrtInfo (input: string) {
     srtInstance.dialogues.push(event)
   }
 
-  console.log('srtInstance', srtInstance)
   return srtInstance
 }
 

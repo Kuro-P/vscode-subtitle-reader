@@ -13,9 +13,9 @@ yarn dev
 Click `Run and debug` button on sider bar, select `Run Extension` Option and run, it will open an debug window.
 
 ## TODO
-- [ ] [preview panel] file pagination
 - [ ] [preview panel] content layout and style
 - [ ] [preview panel] panel position setting
 - [ ] [preview panel] panel style setting
 - [ ] [preview panel] sync content when actived document changed
+- [ ] [preview panel] sync document and panel scroll position 
 - [ ] [preview panel] and more 🤯....

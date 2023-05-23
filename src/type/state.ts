@@ -3,6 +3,7 @@ import { Panel } from '../preview/panel'
 
 class State {
   protected panel: Panel | undefined
+  protected switchPrimaryLang: boolean = false
 
   constructor () {
   }
@@ -28,6 +29,14 @@ class State {
 
   delPanel () {
     this.panel = undefined
+  }
+
+  getSwitchPrimaryLang () {
+    return this.switchPrimaryLang
+  }
+
+  setSwitchPrimaryLang (switchLang: boolean) {
+    this.switchPrimaryLang = switchLang
   }
 }
 

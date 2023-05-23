@@ -89,7 +89,6 @@ export function extractAssInfo (input: string) {
     }
   }
 
-  console.log('assInstance', assInstance)
   return assInstance
 }
 

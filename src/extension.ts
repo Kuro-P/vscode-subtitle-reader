@@ -1,7 +1,7 @@
 import * as vscode from 'vscode'
 import * as path from 'path'
 import { displayPreviewPanel } from './preview'
-import { isSubtitleFile, getFileName } from './common/utils'
+import { isSubtitleFile } from './common/utils'
 import State from './type/state'
 
 export let context: vscode.ExtensionContext
@@ -11,6 +11,7 @@ export function activate(c: vscode.ExtensionContext) {
 	context = c
 	state = new State()
 	console.log('Congratulations, your extension "helloVscode" is now active!')
+	console.log('vscode getConfiguration', vscode.workspace.getConfiguration('subtitleReader.panelPosition'))
 
 	// open file
 	const openFile = vscode.commands.registerCommand('subtitleReader.helloFile', () => {
@@ -36,11 +37,7 @@ export function activate(c: vscode.ExtensionContext) {
 		}
 
 		const cachePanel = state.getPanel()
-		const panelName = getFileName(textEditor.document.fileName)
-		const panel = await displayPreviewPanel(cachePanel, {
-			viewType: panelName,
-			title: panelName
-		})
+		const panel = await displayPreviewPanel(cachePanel)
 
 		!cachePanel && state.setPanel(panel)
 
@@ -49,6 +46,19 @@ export function activate(c: vscode.ExtensionContext) {
 		// TODO set state to vscode context
 	})
 
+	// TODO subtitleReader.showSource
+	const showSource = vscode.commands.registerCommand('subtitleReader.showSource', () => {
+		console.log('show source!!!')
+	})
+
+	const switchPrimaryLang = vscode.commands.registerCommand('subtitleReader.switchPrimaryLang', () => {
+		const panel = state.getPanel()
+		if (!panel) {
+			return
+		}
+
+		panel.webview.postMessage({ switchPrimaryLang: true })
+	})
 
 	// auto open reader panel
 	const onDidChangeActiveTextEditor = vscode.window.onDidChangeActiveTextEditor((textEditor?: vscode.TextEditor) => {
@@ -69,7 +79,9 @@ export function activate(c: vscode.ExtensionContext) {
 	})
 
 	// 注册命令
-	context.subscriptions.push(...[ openFile, openFolder, showPreview, onDidChangeActiveTextEditor ])
+	context.subscriptions.push(...[
+ openFile, openFolder, showPreview, showSource, switchPrimaryLang, onDidChangeActiveTextEditor
+])
 }
 
 // This method is called when your extension is deactivated

@@ -5,8 +5,8 @@ import { promises as fsPromises } from "fs"
 import { extractAssInfo } from './ass'
 import { extractSrtInfo } from './srt'
 import * as Handlebars from 'handlebars'
-import { Panel } from './instance'
-import { context, state } from './../extension'
+import { Panel } from './panel'
+import { context, state, configuration } from './../extension'
 
 export let panel: Panel
 
@@ -17,17 +17,11 @@ export type PanelOptions = {
   localResourceRoots?: vscode.Uri[]
 }
 
-export async function displayPreviewPanel(options?: PanelOptions): Promise<Panel> {
+export async function displayPreviewPanel(panel?: Panel, options?: PanelOptions): Promise<Panel> {
   const document = vscode.window.activeTextEditor?.document
   const fileUri = document ? document.uri : undefined
 
-  // TODO something wrong
-  // const createdPanel = fileUri && state.getPanel(fileUri)
-  // if (createdPanel) {
-  //   return createdPanel
-  // }
-
-  const previewPanel = createPreviewPanel(options)
+  const previewPanel = panel ? panel.webviewPanel : createPreviewPanel(options)
   const content = await generateHTML(previewPanel)
   previewPanel.webview.html = content
 
@@ -38,9 +32,9 @@ export async function displayPreviewPanel(options?: PanelOptions): Promise<Panel
 export function createPreviewPanel(options?: PanelOptions): vscode.WebviewPanel {
 
   const {
-    viewType = "subtitlePreview",
-    title = "Subtitle preview pannel",
-    viewColumn = vscode.ViewColumn.Beside,
+    viewType = "subtitlePreviewPanel",
+    title = "Subtitle preview panel",
+    viewColumn = vscode.ViewColumn[configuration.get('panelPosition') as keyof typeof vscode.ViewColumn],
     localResourceRoots = [ context.extensionUri ]
   } = options || {}
 
@@ -57,7 +51,7 @@ export function createPreviewPanel(options?: PanelOptions): vscode.WebviewPanel 
       enableCommandUris: false,
       enableScripts: true,
       enableFindWidget: true,
-      retainContextWhenHidden: true,
+      retainContextWhenHidden: false,
       localResourceRoots: localResourceRoots
     }
   )
@@ -97,8 +91,8 @@ export async function generateHTML(webviewPanel: vscode.WebviewPanel): Promise<s
       fileName,
       styleUri: styleUri,
       scriptUri: scriptUri,
-      cspSource: webviewPanel.webview.cspSource,
-      nonce: getNonce(),
+      // cspSource: webviewPanel.webview.cspSource,
+      // nonce: getNonce(),
     })
 
     const template = Handlebars.compile(panelTempl)

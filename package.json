@@ -23,17 +23,56 @@
     "commands": [
       {
         "command": "subtitleReader.helloFile",
-        "title": "Hello File"
+        "title": "Hello File",
+        "category": "Subtitle Reader"
       },
       {
         "command": "subtitleReader.helloFolder",
-        "title": "Hello Folder"
+        "title": "Hello Folder",
+        "category": "Subtitle Reader"
       },
       {
         "command": "subtitleReader.showPreviewPanel",
-        "title": "Hello preview"
+        "title": "Open Preview to the side",
+        "category": "Subtitle Reader",
+        "icon": {
+          "light": "icons/srt-icon.svg",
+          "dark": "icons/srt-icon.svg"   
+        }
+      },
+      {
+        "command": "subtitleReader.showSource",
+        "title": "Show Source",
+        "category": "Subtitle Reader",
+        "icon": {
+          "light": "icons/switch.svg",
+          "dark": "icons/switch.svg"
+        }
+      },
+      {
+        "command": "subtitleReader.switchPrimaryLang",
+        "title": "Switch Primary Language style",
+        "category": "Subtitle Reader",
+        "icon": {
+          "light": "icons/switch.svg",
+          "dark": "icons/switch.svg"
+        }
       }
     ],
+    "menus": {
+      "editor/title": [
+        {
+          "command": "subtitleReader.showPreviewPanel",
+          "group": "navigation",
+          "when": "resourceLangId == ass && resourceExtname == .ass || resourceLangId == srt && resourceExtname == .srt"
+        },
+        {
+          "command": "subtitleReader.switchPrimaryLang",
+          "group": "navigation",
+          "when": "activeWebviewPanelId == 'subtitlePreviewPanel'"
+        }
+      ]
+    },
     "languages": [
       {
         "id": "ass",
@@ -99,9 +138,28 @@
           "description": "Automatically close the reader panel when this subtitle files is closed.",
           "scope": "resource"
         },
+        "subtitleReader.panelPosition": {
+          "type": "string",
+          "default": "Beside",
+          "enum": [ "Active", "Beside", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine" ],
+          "description": "Denotes a location of an editor in the window. ",
+          "enumDescriptions": [
+            "Editor active tab",
+            "Editor beside",
+            "The first editor column.",
+            "The second editor column.",
+            "The third editor column.",
+            "The fourth editor column.",
+            "The fifth editor column.",
+            "The sixth editor column.",
+            "The seventh editor column.",
+            "The eighth editor column.",
+            "The ninth editor column."
+          ]
+        },
         "subtitleReader.style": {
           "type": "object",
-          "description": "Custom style for the reader pannel.",
+          "description": "Custom style for the reader panel.",
           "additionalProperties": false,
           "properties": {
             "html": {

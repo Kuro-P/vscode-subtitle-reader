@@ -142,6 +142,7 @@
           "type": "string",
           "default": "Beside",
           "enum": [ "Active", "Beside", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine" ],
+          "description": "Denotes a location of an editor in the window. ",
           "enumDescriptions": [
             "Editor active tab",
             "Editor beside",

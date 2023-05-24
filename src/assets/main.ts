@@ -4,8 +4,6 @@ console.info('hello preview js xixixi')
 
 let contentEl: HTMLDivElement | null = null
 
-// listen lines style change
-
 function handleLangStyleSwitch() {
   if (!contentEl) {
     return
@@ -15,6 +13,7 @@ function handleLangStyleSwitch() {
   contentEl.dataset.langPrimary = _langPrimary
 }
 
+// listen lines style change
 window.addEventListener('message', (event: any) => {
   const message = event.data
   const { switchPrimaryLang } = message

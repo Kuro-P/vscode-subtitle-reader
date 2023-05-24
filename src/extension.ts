@@ -1,17 +1,19 @@
 import * as vscode from 'vscode'
 import * as path from 'path'
 import { displayPreviewPanel } from './preview'
+import { Configuration } from './preview/configuration'
 import { isSubtitleFile } from './common/utils'
 import State from './type/state'
 
 export let context: vscode.ExtensionContext
 export let state: State
+export let configuration: Configuration
 
 export function activate(c: vscode.ExtensionContext) {
 	context = c
 	state = new State()
+	configuration = new Configuration()
 	console.log('Congratulations, your extension "helloVscode" is now active!')
-	console.log('vscode getConfiguration', vscode.workspace.getConfiguration('subtitleReader.panelPosition'))
 
 	// open file
 	const openFile = vscode.commands.registerCommand('subtitleReader.helloFile', () => {
@@ -38,17 +40,16 @@ export function activate(c: vscode.ExtensionContext) {
 
 		const cachePanel = state.getPanel()
 		const panel = await displayPreviewPanel(cachePanel)
-
 		!cachePanel && state.setPanel(panel)
-
-		// TODO if (panel.fileUri in tab.groups) { renderWithStoredDada }
-
-		// TODO set state to vscode context
 	})
 
 	// TODO subtitleReader.showSource
 	const showSource = vscode.commands.registerCommand('subtitleReader.showSource', () => {
 		console.log('show source!!!')
+		// reveal source document
+
+		vscode.window.activeTextEditor?.document
+
 	})
 
 	const switchPrimaryLang = vscode.commands.registerCommand('subtitleReader.switchPrimaryLang', () => {
@@ -56,12 +57,11 @@ export function activate(c: vscode.ExtensionContext) {
 		if (!panel) {
 			return
 		}
-
 		panel.webview.postMessage({ switchPrimaryLang: true })
 	})
 
 	// auto open reader panel
-	const onDidChangeActiveTextEditor = vscode.window.onDidChangeActiveTextEditor((textEditor?: vscode.TextEditor) => {
+	vscode.window.onDidChangeActiveTextEditor((textEditor?: vscode.TextEditor) => {
 		const document = textEditor?.document
 		if (!document) {
 			return
@@ -78,9 +78,27 @@ export function activate(c: vscode.ExtensionContext) {
 		}
 	})
 
+	// configuration change
+	vscode.workspace.onDidChangeConfiguration((event: vscode.ConfigurationChangeEvent) => {
+		if (!event.affectsConfiguration('subtitleReader')) {
+			console.log('修改的并非是 subtitle reader的配置')
+			return
+		}
+
+		configuration.update()
+		if (event.affectsConfiguration('subtitleReader.panelPosition')) {
+			// reveal
+			state.getPanel()?.webviewPanel.reveal(configuration.get('panelPosition') as vscode.ViewColumn)
+		}
+
+		if (event.affectsConfiguration('subtitleReader.style')) {
+			// console.log('style change', configuration.get('style').get('html'))
+		}
+	})
+
 	// 注册命令
 	context.subscriptions.push(...[
- openFile, openFolder, showPreview, showSource, switchPrimaryLang, onDidChangeActiveTextEditor
+ openFile, openFolder, showPreview, showSource, switchPrimaryLang
 ])
 }
 

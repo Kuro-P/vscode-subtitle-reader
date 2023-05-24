@@ -6,7 +6,7 @@ import { extractAssInfo } from './ass'
 import { extractSrtInfo } from './srt'
 import * as Handlebars from 'handlebars'
 import { Panel } from './panel'
-import { context, state } from './../extension'
+import { context, state, configuration } from './../extension'
 
 export let panel: Panel
 
@@ -34,7 +34,7 @@ export function createPreviewPanel(options?: PanelOptions): vscode.WebviewPanel 
   const {
     viewType = "subtitlePreviewPanel",
     title = "Subtitle preview panel",
-    viewColumn = vscode.ViewColumn.Beside,
+    viewColumn = vscode.ViewColumn[configuration.get('panelPosition') as keyof typeof vscode.ViewColumn],
     localResourceRoots = [ context.extensionUri ]
   } = options || {}
 

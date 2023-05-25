@@ -15,6 +15,8 @@ export function activate(c: vscode.ExtensionContext) {
 	configuration = new Configuration()
 	console.log('Congratulations, your extension "helloVscode" is now active!')
 
+	// TODO 激活的时候也应该查看当前的文档是不是 subtitle，如果是则 show panel
+
 	// open file
 	const openFile = vscode.commands.registerCommand('subtitleReader.helloFile', () => {
 		vscode.window.showErrorMessage('Hello File xixixi from VS Code')
@@ -52,6 +54,7 @@ export function activate(c: vscode.ExtensionContext) {
 
 	})
 
+	// switch primary lang style
 	const switchPrimaryLang = vscode.commands.registerCommand('subtitleReader.switchPrimaryLang', () => {
 		const panel = state.getPanel()
 		if (!panel) {
@@ -70,13 +73,16 @@ export function activate(c: vscode.ExtensionContext) {
 		if (!isSubtitleFile(document.languageId)) {
 			return
 		}
-		const configuration: vscode.WorkspaceConfiguration = vscode.workspace.getConfiguration('subtitleReader')
+
+		configuration.flush()
 		const autoOpen = configuration.get('autoOpen')
 
 		if (autoOpen) {
 			vscode.commands.executeCommand(`subtitleReader.showPreviewPanel`)
 		}
 	})
+
+	// TODO on active tab change 
 
 	// configuration change
 	vscode.workspace.onDidChangeConfiguration((event: vscode.ConfigurationChangeEvent) => {
@@ -85,8 +91,7 @@ export function activate(c: vscode.ExtensionContext) {
 			return
 		}
 
-		configuration.update()
-
+		configuration.flush()
 		if (event.affectsConfiguration('subtitleReader.style')) {
 			// console.log('style change', configuration.get('style').get('html'))
 		}

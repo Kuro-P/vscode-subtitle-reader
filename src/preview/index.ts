@@ -1,5 +1,5 @@
 import * as vscode from 'vscode'
-import { isSSA, isASS, isSRT, getFileName, getNonce } from '../common/utils'
+import { isSSA, isASS, isSRT, getFileName } from '../common/utils'
 import * as path from 'path'
 import { promises as fsPromises } from "fs"
 import { extractAssInfo } from './ass'
@@ -23,6 +23,7 @@ export async function displayPreviewPanel(panel?: Panel, options?: PanelOptions)
 
   const previewPanel = panel ? panel.webviewPanel : createPreviewPanel(options)
   const content = await generateHTML(previewPanel)
+  fileUri && (previewPanel.title = 'Subtitle-' + getFileName(fileUri?.path))
   previewPanel.webview.html = content
 
   panel = new Panel(previewPanel, fileUri)

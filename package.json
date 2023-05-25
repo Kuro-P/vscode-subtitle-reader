@@ -131,13 +131,7 @@
           "default": true,
           "description": "Automatically open the reader panel when an subtitle (.ass, .srt) file is opened.",
           "scope": "resource"
-        },
-        "subtitleReader.autoClose": {
-          "type": "boolean",
-          "default": true,
-          "description": "Automatically close the reader panel when this subtitle files is closed.",
-          "scope": "resource"
-        },
+        }, 
         "subtitleReader.style": {
           "type": "object",
           "description": "Custom style for the reader panel.",

@@ -5,7 +5,7 @@ class Configuration {
   configuration?: vscode.WorkspaceConfiguration
 
   constructor () {
-    this.configuration = this.update()
+    this.configuration = this.flush()
   }
 
   get(name: string) {
@@ -14,7 +14,8 @@ class Configuration {
     }
   }
 
-  update(): vscode.WorkspaceConfiguration {
+  // get the lastest configuration
+  flush(): vscode.WorkspaceConfiguration {
     this.configuration = vscode.workspace.getConfiguration('subtitleReader')
 
     return this.configuration

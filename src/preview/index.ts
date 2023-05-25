@@ -34,7 +34,7 @@ export function createPreviewPanel(options?: PanelOptions): vscode.WebviewPanel 
   const {
     viewType = "subtitlePreviewPanel",
     title = "Subtitle preview panel",
-    viewColumn = vscode.ViewColumn[configuration.get('panelPosition') as keyof typeof vscode.ViewColumn],
+    viewColumn = vscode.ViewColumn.Beside,
     localResourceRoots = [ context.extensionUri ]
   } = options || {}
 

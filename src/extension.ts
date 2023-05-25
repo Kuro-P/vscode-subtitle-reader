@@ -86,10 +86,6 @@ export function activate(c: vscode.ExtensionContext) {
 		}
 
 		configuration.update()
-		if (event.affectsConfiguration('subtitleReader.panelPosition')) {
-			// reveal
-			state.getPanel()?.webviewPanel.reveal(configuration.get('panelPosition') as vscode.ViewColumn)
-		}
 
 		if (event.affectsConfiguration('subtitleReader.style')) {
 			// console.log('style change', configuration.get('style').get('html'))

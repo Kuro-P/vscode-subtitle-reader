@@ -138,25 +138,6 @@
           "description": "Automatically close the reader panel when this subtitle files is closed.",
           "scope": "resource"
         },
-        "subtitleReader.panelPosition": {
-          "type": "string",
-          "default": "Beside",
-          "enum": [ "Active", "Beside", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine" ],
-          "description": "Denotes a location of an editor in the window. ",
-          "enumDescriptions": [
-            "Editor active tab",
-            "Editor beside",
-            "The first editor column.",
-            "The second editor column.",
-            "The third editor column.",
-            "The fourth editor column.",
-            "The fifth editor column.",
-            "The sixth editor column.",
-            "The seventh editor column.",
-            "The eighth editor column.",
-            "The ninth editor column."
-          ]
-        },
         "subtitleReader.style": {
           "type": "object",
           "description": "Custom style for the reader panel.",

@@ -14,8 +14,8 @@ export function activate(c: vscode.ExtensionContext) {
 	state = new State()
 	configuration = new Configuration()
 	console.log('Congratulations, your extension "helloVscode" is now active!')
-
-	// TODO 激活的时候也应该查看当前的文档是不是 subtitle，如果是则 show panel
+	console.log('vscode.window.activeTextEditor uri', vscode.window.activeTextEditor?.document.fileName)
+	const activeTextEditor = vscode.window.activeTextEditor
 
 	// open file
 	const openFile = vscode.commands.registerCommand('subtitleReader.helloFile', () => {
@@ -45,15 +45,6 @@ export function activate(c: vscode.ExtensionContext) {
 		!cachePanel && state.setPanel(panel)
 	})
 
-	// TODO subtitleReader.showSource
-	const showSource = vscode.commands.registerCommand('subtitleReader.showSource', () => {
-		console.log('show source!!!')
-		// reveal source document
-
-		vscode.window.activeTextEditor?.document
-
-	})
-
 	// switch primary lang style
 	const switchPrimaryLang = vscode.commands.registerCommand('subtitleReader.switchPrimaryLang', () => {
 		const panel = state.getPanel()
@@ -64,7 +55,7 @@ export function activate(c: vscode.ExtensionContext) {
 	})
 
 	// auto open reader panel
-	vscode.window.onDidChangeActiveTextEditor((textEditor?: vscode.TextEditor) => {
+	const onDidChangeActiveTextEditor = vscode.window.onDidChangeActiveTextEditor((textEditor?: vscode.TextEditor) => {
 		const document = textEditor?.document
 		if (!document) {
 			return
@@ -75,17 +66,13 @@ export function activate(c: vscode.ExtensionContext) {
 		}
 
 		configuration.flush()
-		const autoOpen = configuration.get('autoOpen')
-
-		if (autoOpen) {
+		if (configuration.get('autoOpen')) {
 			vscode.commands.executeCommand(`subtitleReader.showPreviewPanel`)
 		}
 	})
 
-	// TODO on active tab change 
-
 	// configuration change
-	vscode.workspace.onDidChangeConfiguration((event: vscode.ConfigurationChangeEvent) => {
+	const onDidChangeConfiguration = vscode.workspace.onDidChangeConfiguration((event: vscode.ConfigurationChangeEvent) => {
 		if (!event.affectsConfiguration('subtitleReader')) {
 			console.log('修改的并非是 subtitle reader的配置')
 			return
@@ -97,9 +84,15 @@ export function activate(c: vscode.ExtensionContext) {
 		}
 	})
 
+	// auto open preview panel when workspace open subtitle file before
+	if (configuration.get('autoOpen') && activeTextEditor && isSubtitleFile(activeTextEditor.document.fileName)) {
+		vscode.commands.executeCommand('subtitleReader.showPreviewPanel')
+	}
+
 	// 注册命令
 	context.subscriptions.push(...[
- openFile, openFolder, showPreview, showSource, switchPrimaryLang
+ openFile, openFolder, showPreview, switchPrimaryLang,
+ onDidChangeActiveTextEditor, onDidChangeConfiguration
 ])
 }
 

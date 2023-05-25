@@ -41,15 +41,6 @@
         }
       },
       {
-        "command": "subtitleReader.showSource",
-        "title": "Show Source",
-        "category": "Subtitle Reader",
-        "icon": {
-          "light": "icons/switch.svg",
-          "dark": "icons/switch.svg"
-        }
-      },
-      {
         "command": "subtitleReader.switchPrimaryLang",
         "title": "Switch Primary Language style",
         "category": "Subtitle Reader",

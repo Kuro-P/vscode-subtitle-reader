@@ -4,7 +4,6 @@ interface PanelInstance {
   webviewPanel: vscode.WebviewPanel
   webview: vscode.Webview,
   fileUri?: vscode.Uri
-  pagination: number
   show: () => void
   reload: () => void
   refresh: () => void
@@ -15,8 +14,6 @@ class Panel implements PanelInstance {
   webviewPanel: vscode.WebviewPanel
   webview: vscode.Webview
   fileUri?: vscode.Uri
-  // 待定
-  pagination: number = 0
 
   // create
   constructor(webviewPanel: vscode.WebviewPanel, fileUri?: vscode.Uri) {

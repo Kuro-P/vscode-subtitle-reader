@@ -2,7 +2,7 @@ import * as vscode from 'vscode'
 import * as path from 'path'
 import { displayPreviewPanel } from './preview'
 import { Configuration } from './preview/configuration'
-import { isSubtitleFile } from './common/utils'
+import { isSubtitleFile, getFileName, isASS } from './common/utils'
 import State from './type/state'
 
 export let context: vscode.ExtensionContext
@@ -61,14 +61,23 @@ export function activate(c: vscode.ExtensionContext) {
 			return
 		}
 
-		if (!isSubtitleFile(document.languageId)) {
+		const autoOpen = configuration.get('autoOpen')
+		if (!isSubtitleFile(document.languageId) || !autoOpen) {
 			return
 		}
 
-		configuration.flush()
-		if (configuration.get('autoOpen')) {
-			vscode.commands.executeCommand(`subtitleReader.showPreviewPanel`)
+		vscode.commands.executeCommand(`subtitleReader.showPreviewPanel`)
+	})
+
+	// auto close reader panel
+	const onDidOpenTextDocument = vscode.workspace.onDidOpenTextDocument((document: vscode.TextDocument) => {
+		const readerPanel = state.getPanel()
+		const autoClose = configuration.get('autoClose')
+		if (!readerPanel || isSubtitleFile(document.languageId) || !autoClose) {
+			return
 		}
+
+		readerPanel.dispose()
 	})
 
 	// configuration change
@@ -84,6 +93,9 @@ export function activate(c: vscode.ExtensionContext) {
 		}
 	})
 
+	// TOOD sync context changes
+
+
 	// auto open preview panel when workspace open subtitle file before
 	if (configuration.get('autoOpen') && activeTextEditor && isSubtitleFile(activeTextEditor.document.fileName)) {
 		vscode.commands.executeCommand('subtitleReader.showPreviewPanel')
@@ -91,9 +103,10 @@ export function activate(c: vscode.ExtensionContext) {
 
 	// 注册命令
 	context.subscriptions.push(...[
- openFile, openFolder, showPreview, switchPrimaryLang,
- onDidChangeActiveTextEditor, onDidChangeConfiguration
-])
+ 		openFile, openFolder, showPreview, switchPrimaryLang,
+ 		onDidChangeActiveTextEditor, onDidChangeConfiguration,
+		onDidOpenTextDocument
+	])
 }
 
 // This method is called when your extension is deactivated

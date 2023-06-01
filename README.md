@@ -19,3 +19,4 @@ Click `Run and debug` button on sider bar, select `Run Extension` Option and run
 - [ ] [preview panel] sync content when actived document changed
 - [ ] [preview panel] sync document and panel scroll position 
 - [ ] [preview panel] and more 🤯....
+- [ ] [extension assets] subtitle file icons

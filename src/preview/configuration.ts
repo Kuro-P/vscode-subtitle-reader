@@ -9,6 +9,7 @@ class Configuration {
   }
 
   get(name: string) {
+    this.flush()
     if (this.configuration) {
       return this.configuration.get(name)
     }

@@ -76,7 +76,7 @@ export function extractAssInfo (input: string) {
         const [ primaryText, subsidiaryText ] = rawText.split(/\\N/).map(str => str.replace(/\{.*?\}/g, ''))
         const startTime = dialogFields[startIdx],
               endTime = dialogFields[endIdx]
-        const lineNumber = i + 1
+        const lineNumber = assInstance.dialogues.length + 1
 
         let event: AssEvent = {
           startTime,

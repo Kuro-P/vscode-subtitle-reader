@@ -29,6 +29,7 @@ export function extractSrtInfo (input: string) {
     const [ startTime, endTime ] = timeAxis.split(/\s-->\s/)
     const rawText = lineText.join('\n')
     const [ primaryText, ...subsidiaryText ] = lineText.map(text => text.replace(/\{.*?\}/g, ''))
+    const lineNumber = i + 1
 
     let event: SrtEvent = {
       lineOrder,
@@ -36,7 +37,8 @@ export function extractSrtInfo (input: string) {
       endTime,
       primaryText,
       subsidiaryText: subsidiaryText.join(''),
-      rawText
+      rawText,
+      lineNumber
     }
     srtInstance.dialogues.push(event)
   }

@@ -25,7 +25,7 @@ export function activate(c: vscode.ExtensionContext) {
 		})
 	})
 
-	// openFolder
+	// open Folder
 	const openFolder = vscode.commands.registerCommand('subtitleReader.helloFolder', () => {
 		const folderPath = path.join(context.extensionPath, '/test')
 		const folderPathParsed = folderPath.split(`\\`).join(`/`)
@@ -34,6 +34,7 @@ export function activate(c: vscode.ExtensionContext) {
 		vscode.commands.executeCommand(`vscode.openFolder`, folderUri)
 	})
 
+	// open preview panel
 	const showPreview = vscode.commands.registerCommand('subtitleReader.showPreviewPanel', async () => {
 		const textEditor = vscode.window.activeTextEditor
 		if (!textEditor) {
@@ -42,6 +43,8 @@ export function activate(c: vscode.ExtensionContext) {
 
 		const cachePanel = state.getPanel()
 		const panel = await displayPreviewPanel(cachePanel)
+		panel.webview.postMessage({ resetDocument: true })
+
 		!cachePanel && state.setPanel(panel)
 	})
 

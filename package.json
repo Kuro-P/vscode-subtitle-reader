@@ -129,6 +129,12 @@
           "description": "Automatically close the reader panel when other file is opened.",
           "scope": "resource"
         },
+        "subtitleReader.showDialogueLineNumber": {
+          "type": "boolean",
+          "default": true,
+          "description": "Display line number of dialogues.",
+          "scope": "resource"
+        },
         "subtitleReader.style": {
           "type": "object",
           "description": "Custom style for the reader panel.",

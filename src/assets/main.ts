@@ -2,26 +2,27 @@ import './main.scss'
 
 console.info('hello preview js xixixi')
 
-let contentEl: HTMLDivElement | null = null
 
-function handleLangStyleSwitch() {
+function handleLangStyleSwitch(langPrimary?: 'primary' | 'subsidiary' ) {
+  const contentEl: HTMLDivElement | null = document.querySelector('.content')
   if (!contentEl) {
     return
   }
 
-  const _langPrimary = contentEl.dataset.langPrimary === 'primary' ? "subsidiary" : "primary"
+  const _langPrimary = langPrimary || (contentEl.dataset.langPrimary === 'primary' ? 'subsidiary' : 'primary')
   contentEl.dataset.langPrimary = _langPrimary
+}
+
+function handleResetDocument() {
+  window.scrollTo(0, 0)
+  handleLangStyleSwitch('primary')
 }
 
 // listen lines style change
 window.addEventListener('message', (event: any) => {
   const message = event.data
-  const { switchPrimaryLang } = message
+  const { switchPrimaryLang, resetDocument } = message
 
-  if (!contentEl) {
-    contentEl = document.querySelector('.content')
-  }
-
-  console.log('message', message)
   switchPrimaryLang && handleLangStyleSwitch()
+  resetDocument && handleResetDocument()
 })

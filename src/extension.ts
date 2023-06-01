@@ -43,9 +43,11 @@ export function activate(c: vscode.ExtensionContext) {
 
 		const cachePanel = state.getPanel()
 		const panel = await displayPreviewPanel(cachePanel)
-		panel.webview.postMessage({ resetDocument: true })
+		state.setPanel(panel)
 
-		!cachePanel && state.setPanel(panel)
+		if (textEditor.document.uri.fsPath !== cachePanel?.fileUri?.fsPath) {
+			panel.webview.postMessage({ resetDocument: true })
+		}
 	})
 
 	// switch primary lang style

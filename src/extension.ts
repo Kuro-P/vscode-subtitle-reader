@@ -1,13 +1,13 @@
 import * as vscode from 'vscode'
 import * as path from 'path'
 import { displayPreviewPanel } from './preview'
-import { Configuration } from './preview/configuration'
-import { isSubtitleFile, getFileName, isASS } from './common/utils'
+import { isSubtitleFile, getFileName } from './common/utils'
 import State from './type/state'
 
 export let context: vscode.ExtensionContext
 export let state: State
 export let configuration: Configuration
+import Configuration from './preview/configuration'
 
 export function activate(c: vscode.ExtensionContext) {
 	context = c

@@ -1,16 +1,15 @@
-import * as vscode from 'vscode'
 import { Panel } from '../preview/panel'
 
 
 class State {
-  protected panel: Panel | undefined
-  protected switchPrimaryLang: boolean = false
+  protected _panel: Panel | undefined
+  protected _switchPrimaryLang: boolean = false
 
-  constructor () {
+  static getAuthor () {
   }
 
   isCreatedPanel () {
-    return !!this.panel
+    return !!this._panel
   }
 
   setPanel (panel: Panel) {
@@ -18,26 +17,26 @@ class State {
       return
     }
 
-    this.panel = panel
-    this.panel.onDidDispose(() => {
+    this._panel = panel
+    this._panel.onDidDispose(() => {
       this.delPanel()
     })
   }
 
   getPanel () {
-    return this.panel
+    return this._panel
   }
 
   delPanel () {
-    this.panel = undefined
+    this._panel = undefined
   }
 
   setSwitchPrimaryLang (switchLang: boolean) {
-    this.switchPrimaryLang = switchLang
+    this._switchPrimaryLang = switchLang
   }
 
   getSwitchPrimaryLang () {
-    return this.switchPrimaryLang
+    return this._switchPrimaryLang
   }
 }
 

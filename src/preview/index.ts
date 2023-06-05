@@ -17,12 +17,12 @@ export type PanelOptions = {
   localResourceRoots?: vscode.Uri[]
 }
 
-export async function displayPreviewPanel(panel?: Panel, options?: PanelOptions): Promise<Panel> {
-  const document = vscode.window.activeTextEditor?.document
+export async function displayPreviewPanel(panel?: Panel, options?: PanelOptions, textDocument?: vscode.TextDocument): Promise<Panel> {
+  const document = textDocument || vscode.window.activeTextEditor?.document
   const fileUri = document ? document.uri : undefined
 
   const previewPanel = panel ? panel.webviewPanel : createPreviewPanel(options)
-  const content = await generateHTML(previewPanel)
+  const content = await generateHTML(previewPanel, textDocument)
   fileUri && (previewPanel.title = 'Subtitle-' + getFileName(fileUri?.path))
   previewPanel.webview.html = content
 
@@ -60,10 +60,10 @@ export function createPreviewPanel(options?: PanelOptions): vscode.WebviewPanel 
   return webviewPanel
 }
 
-export async function generateHTML(webviewPanel: vscode.WebviewPanel): Promise<string> {
-  const document = vscode.window.activeTextEditor?.document
+export async function generateHTML(webviewPanel: vscode.WebviewPanel, textDocument?: vscode.TextDocument): Promise<string> {
+  const document = textDocument || vscode.window.activeTextEditor?.document
   if (!document) {
-    vscode.window.showErrorMessage('Not found activated tab')
+    vscode.window.showErrorMessage('Not found panel origin document')
     return ''
   }
 

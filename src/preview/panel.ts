@@ -6,8 +6,6 @@ interface PanelInstance {
   webview: vscode.Webview,
   fileUri?: vscode.Uri
   show: () => void
-  reload: () => void
-  refresh: () => void
   dispose: () => void
 }
 
@@ -26,16 +24,6 @@ class Panel implements PanelInstance {
   // bring webviewPanel to view
   show(viewColumn?: vscode.ViewColumn, preserveFocus?: boolean) {
     this.webviewPanel.reveal(viewColumn, preserveFocus)
-  }
-
-  // 整个 webview 重新加载
-  reload() {
-
-  }
-
-  // 局部刷新 保留滚动条位置？
-  refresh() {
-
   }
 
   // 废弃

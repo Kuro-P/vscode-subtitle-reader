@@ -34,8 +34,8 @@ export function activate(c: vscode.ExtensionContext) {
 		vscode.commands.executeCommand(`vscode.openFolder`, folderUri)
 	})
 
-	// open preview panel
-	const showPreview = vscode.commands.registerCommand('subtitleReader.showPreviewPanel', async () => {
+	// open reader panel
+	const showPanel = vscode.commands.registerCommand('subtitleReader.showPreviewPanel', async () => {
 		const textEditor = vscode.window.activeTextEditor
 		if (!textEditor) {
 			return vscode.window.showErrorMessage('Not found activated tab')
@@ -48,6 +48,21 @@ export function activate(c: vscode.ExtensionContext) {
 		if (textEditor.document.uri.fsPath !== cachePanel?.fileUri?.fsPath) {
 			panel.webview.postMessage({ resetDocument: true })
 		}
+	})
+
+	// refresh reader panel
+	const refreshPanel = vscode.commands.registerCommand('subtitleReader.refreshPanel', async () => {
+		// !!! unlike showPanel, refresh action was trigger by panel focus, so vscode.window.activeTextEditor was undefined at here.
+		console.log('refreshPanel')
+
+		const cachePanel = state.getPanel()
+		if (!cachePanel || !cachePanel.fileUri) {
+			return
+		}
+
+		const textDocument = await vscode.workspace.openTextDocument(cachePanel.fileUri)
+		const panel = await displayPreviewPanel(cachePanel, undefined, textDocument)
+		state.setPanel(panel)
 	})
 
 	// switch primary lang style
@@ -98,7 +113,18 @@ export function activate(c: vscode.ExtensionContext) {
 		}
 	})
 
-	// TOOD sync context changes
+	// TODO sync context changes
+	// document text change
+	const onDidChangeTextDocument = vscode.workspace.onDidChangeTextDocument((event: vscode.TextDocumentChangeEvent) => {
+		const { document, contentChanges } = event
+
+		if (!isSubtitleFile(document.fileName)) {
+			return
+		}
+
+		// console.log('onDidChangeTextDocument document', document.fileName)
+		// console.log('contentChanges', contentChanges)
+	})
 
 
 	// auto open preview panel when workspace open subtitle file before
@@ -108,9 +134,9 @@ export function activate(c: vscode.ExtensionContext) {
 
 	// 注册命令
 	context.subscriptions.push(...[
- 		openFile, openFolder, showPreview, switchPrimaryLang,
+ 		openFile, openFolder, showPanel, refreshPanel, switchPrimaryLang,
  		onDidChangeActiveTextEditor, onDidChangeConfiguration,
-		onDidOpenTextDocument
+		onDidOpenTextDocument, onDidChangeTextDocument
 	])
 }
 

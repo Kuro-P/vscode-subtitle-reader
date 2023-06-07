@@ -41,6 +41,15 @@
         }
       },
       {
+        "command": "subtitleReader.refreshPanel",
+        "title": "Refresh Panel",
+        "category": "Subtitle Reader",
+        "icon": {
+          "light": "icons/refresh-dark.svg",
+          "dark": "icons/refresh-light.svg"
+        }
+      },
+      {
         "command": "subtitleReader.switchPrimaryLang",
         "title": "Switch Primary Language style",
         "category": "Subtitle Reader",
@@ -56,6 +65,11 @@
           "command": "subtitleReader.showPreviewPanel",
           "group": "navigation",
           "when": "resourceLangId == ass && resourceExtname == .ass || resourceLangId == srt && resourceExtname == .srt"
+        },
+        {
+          "command": "subtitleReader.refreshPanel",
+          "group": "navigation",
+          "when": "activeWebviewPanelId == 'subtitlePreviewPanel'"
         },
         {
           "command": "subtitleReader.switchPrimaryLang",

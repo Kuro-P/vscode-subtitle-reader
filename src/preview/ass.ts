@@ -4,11 +4,18 @@ import { DialogueEvent } from './../type/file'
 interface AssEvent extends DialogueEvent {
 }
 
-class Ass {
+interface AssDialogueFormat {
+  startIdx: number,
+  endIdx: number,
+  textIdx: number
+}
+
+export class Ass {
   scriptInfo: string[] = []
   styleInfo: string[] = []
   eventsInfo: AssEvent[] = []
   dialogues: AssEvent[] = []
+  dialogueFormat?: AssDialogueFormat
 }
 
 
@@ -64,27 +71,30 @@ export function extractAssInfo (input: string) {
       }
 
       if (/^Dialogue/i.test(line)) {
-        const dialogFields = line.replace(/Format:/i, "").split(",")
         const [ startIdx, endIdx, textIdx ] = fieldIdxs
-        // plain text (remove ass style)
-        // in case there a comma in the text
-        const rawText =
-          textIdx === dialogFields.length - 1 ?
-            dialogFields[textIdx] :
-            dialogFields.slice(textIdx).join(',')
+        assInstance.dialogueFormat = {
+          startIdx,
+          endIdx,
+          textIdx
+        }
 
-        const [ primaryText, subsidiaryText ] = rawText.split(/\\N/).map(str => str.replace(/\{.*?\}/g, ''))
-        const startTime = dialogFields[startIdx],
-              endTime = dialogFields[endIdx]
-        const lineNumber = assInstance.dialogues.length + 1
+        const lineInfo = extractAssInfoFromLine(line, assInstance.dialogueFormat)
+        if (!lineInfo) {
+          continue
+        }
+
+        const { startTime, endTime, primaryText, subsidiaryText, rawText } = lineInfo
+        const lineNumber = assInstance.dialogues.length + 1,
+              rawLineNumber = i
 
         let event: AssEvent = {
           startTime,
           endTime,
-          rawText,
           primaryText,
           subsidiaryText,
-          lineNumber
+          rawText,
+          lineNumber,
+          rawLineNumber
         }
         assInstance.dialogues.push(event)
       }
@@ -94,5 +104,31 @@ export function extractAssInfo (input: string) {
   return assInstance
 }
 
+export function extractAssInfoFromLine(line: string, format: AssDialogueFormat): Pick<AssEvent, 'startTime' | 'endTime' | 'primaryText' | 'subsidiaryText' | 'rawText'> | null {
+  if (!format) {
+    return null
+  }
 
+  const dialogFields = line.replace(/Dialogue:/i, "").split(",")
+  const { startIdx, endIdx, textIdx } = format
+
+  // plain text (remove ass style)
+  // in case there a comma in the text
+  const rawText =
+    textIdx === dialogFields.length - 1 ?
+      dialogFields[textIdx] :
+      dialogFields.slice(textIdx).join(',')
+
+  const [ primaryText, subsidiaryText ] = rawText.split(/\\N/).map(str => str.replace(/\{.*?\}/g, ''))
+  const startTime = dialogFields[startIdx],
+        endTime = dialogFields[endIdx]
+
+  return {
+    startTime,
+    endTime,
+    primaryText,
+    subsidiaryText,
+    rawText
+  }
+}
 

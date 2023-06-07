@@ -1,13 +1,13 @@
 import * as vscode from 'vscode'
 import * as path from 'path'
-import { displayPreviewPanel } from './preview'
-import { Configuration } from './preview/configuration'
-import { isSubtitleFile, getFileName, isASS } from './common/utils'
+import { displayPreviewPanel, updateContent } from './preview'
+import { isSubtitleFile, getFileName } from './common/utils'
 import State from './type/state'
 
 export let context: vscode.ExtensionContext
 export let state: State
 export let configuration: Configuration
+import Configuration from './preview/configuration'
 
 export function activate(c: vscode.ExtensionContext) {
 	context = c
@@ -34,8 +34,8 @@ export function activate(c: vscode.ExtensionContext) {
 		vscode.commands.executeCommand(`vscode.openFolder`, folderUri)
 	})
 
-	// open preview panel
-	const showPreview = vscode.commands.registerCommand('subtitleReader.showPreviewPanel', async () => {
+	// open reader panel
+	const showPanel = vscode.commands.registerCommand('subtitleReader.showPreviewPanel', async () => {
 		const textEditor = vscode.window.activeTextEditor
 		if (!textEditor) {
 			return vscode.window.showErrorMessage('Not found activated tab')
@@ -46,17 +46,32 @@ export function activate(c: vscode.ExtensionContext) {
 		state.setPanel(panel)
 
 		if (textEditor.document.uri.fsPath !== cachePanel?.fileUri?.fsPath) {
-			panel.webview.postMessage({ resetDocument: true })
+			panel.resetAppearance()
 		}
+	})
+
+	// refresh reader panel
+	const refreshPanel = vscode.commands.registerCommand('subtitleReader.refreshPanel', async () => {
+		// !!! unlike showPanel, refresh action was trigger by panel focus, so vscode.window.activeTextEditor was undefined at here.
+		console.log('refreshPanel')
+
+		const cachePanel = state.getPanel()
+		if (!cachePanel || !cachePanel.fileUri) {
+			return
+		}
+
+		const textDocument = await vscode.workspace.openTextDocument(cachePanel.fileUri)
+		const panel = await displayPreviewPanel(cachePanel, undefined, textDocument)
+		state.setPanel(panel)
 	})
 
 	// switch primary lang style
 	const switchPrimaryLang = vscode.commands.registerCommand('subtitleReader.switchPrimaryLang', () => {
 		const panel = state.getPanel()
 		if (!panel) {
-			return
+			return vscode.window.showWarningMessage('Not found activated reader panel.')
 		}
-		panel.webview.postMessage({ switchPrimaryLang: true })
+		panel.switchPrimaryLang()
 	})
 
 	// auto open reader panel
@@ -98,19 +113,36 @@ export function activate(c: vscode.ExtensionContext) {
 		}
 	})
 
-	// TOOD sync context changes
+	// TODO sync context changes
+	// document text change
+	const onDidChangeTextDocument = vscode.workspace.onDidChangeTextDocument((event: vscode.TextDocumentChangeEvent) => {
+		const { document, contentChanges } = event
+		const panel = state.getPanel()
 
+		if (!panel) {
+			return
+		}
+
+		if (!isSubtitleFile(document.fileName)) {
+			return
+		}
+
+		if (!contentChanges?.length) {
+			return
+		}
+
+		updateContent(panel, document, contentChanges.map(changeEvent => changeEvent.range))
+	})
 
 	// auto open preview panel when workspace open subtitle file before
 	if (configuration.get('autoOpen') && activeTextEditor && isSubtitleFile(activeTextEditor.document.fileName)) {
 		vscode.commands.executeCommand('subtitleReader.showPreviewPanel')
 	}
 
-	// 注册命令
 	context.subscriptions.push(...[
- 		openFile, openFolder, showPreview, switchPrimaryLang,
+ 		openFile, openFolder, showPanel, refreshPanel, switchPrimaryLang,
  		onDidChangeActiveTextEditor, onDidChangeConfiguration,
-		onDidOpenTextDocument
+		onDidOpenTextDocument, onDidChangeTextDocument
 	])
 }
 

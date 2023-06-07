@@ -13,16 +13,29 @@ function handleLangStyleSwitch(langPrimary?: 'primary' | 'subsidiary' ) {
   contentEl.dataset.langPrimary = _langPrimary
 }
 
-function handleResetDocument() {
+function handleResetAppearance() {
   window.scrollTo(0, 0)
   handleLangStyleSwitch('primary')
+}
+
+function handleUpdateContent(change: { rawLineNumber: number, text: string }) {
+  const dialogueEl = document.getElementById(String(change.rawLineNumber)) as HTMLElement
+  if (!dialogueEl) {
+    return
+  }
+
+  dialogueEl.innerHTML = `
+    <p class="line-number">${ dialogueEl.dataset.lineNumber }</p>
+    ${ change.text }
+  `
 }
 
 // listen lines style change
 window.addEventListener('message', (event: any) => {
   const message = event.data
-  const { switchPrimaryLang, resetDocument } = message
+  const { switchPrimaryLang, resetAppearance, updateContent } = message
 
   switchPrimaryLang && handleLangStyleSwitch()
-  resetDocument && handleResetDocument()
+  resetAppearance && handleResetAppearance()
+  updateContent && handleUpdateContent(updateContent)
 })

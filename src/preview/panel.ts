@@ -1,13 +1,14 @@
 import * as vscode from 'vscode'
 
+
 interface PanelInstance {
   webviewPanel: vscode.WebviewPanel
   webview: vscode.Webview,
   fileUri?: vscode.Uri
   show: () => void
-  reload: () => void
-  refresh: () => void
   dispose: () => void
+  switchPrimaryLang: () => void
+  resetAppearance: () => void
 }
 
 class Panel implements PanelInstance {
@@ -15,29 +16,16 @@ class Panel implements PanelInstance {
   webview: vscode.Webview
   fileUri?: vscode.Uri
 
-  // create
   constructor(webviewPanel: vscode.WebviewPanel, fileUri?: vscode.Uri) {
     this.webviewPanel = webviewPanel
     this.webview = webviewPanel.webview
     this.fileUri = fileUri
   }
 
-  // bring webviewPanel to view
   show(viewColumn?: vscode.ViewColumn, preserveFocus?: boolean) {
     this.webviewPanel.reveal(viewColumn, preserveFocus)
   }
 
-  // 整个 webview 重新加载
-  reload() {
-
-  }
-
-  // 局部刷新 保留滚动条位置？
-  refresh() {
-
-  }
-
-  // 废弃
   dispose() {
     this.webviewPanel.dispose()
   }
@@ -49,6 +37,22 @@ class Panel implements PanelInstance {
     })
   }
 
+  switchPrimaryLang() {
+    this.webview.postMessage({ switchPrimaryLang: true })
+  }
+
+  resetAppearance() {
+    this.webview.postMessage({ resetAppearance: true })
+  }
+
+  updateContent(rawLineNumber: number, text?: string) {
+    this.webview.postMessage({
+      updateContent: {
+        rawLineNumber,
+        text
+      }
+    })
+  }
 }
 
 export { Panel, PanelInstance }

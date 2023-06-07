@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
 import * as path from 'path'
-import { displayPreviewPanel } from './preview'
+import { displayPreviewPanel, updateContent } from './preview'
 import { isSubtitleFile, getFileName } from './common/utils'
 import State from './type/state'
 
@@ -46,7 +46,7 @@ export function activate(c: vscode.ExtensionContext) {
 		state.setPanel(panel)
 
 		if (textEditor.document.uri.fsPath !== cachePanel?.fileUri?.fsPath) {
-			panel.webview.postMessage({ resetDocument: true })
+			panel.resetAppearance()
 		}
 	})
 
@@ -69,9 +69,9 @@ export function activate(c: vscode.ExtensionContext) {
 	const switchPrimaryLang = vscode.commands.registerCommand('subtitleReader.switchPrimaryLang', () => {
 		const panel = state.getPanel()
 		if (!panel) {
-			return
+			return vscode.window.showWarningMessage('Not found activated reader panel.')
 		}
-		panel.webview.postMessage({ switchPrimaryLang: true })
+		panel.switchPrimaryLang()
 	})
 
 	// auto open reader panel
@@ -117,22 +117,28 @@ export function activate(c: vscode.ExtensionContext) {
 	// document text change
 	const onDidChangeTextDocument = vscode.workspace.onDidChangeTextDocument((event: vscode.TextDocumentChangeEvent) => {
 		const { document, contentChanges } = event
+		const panel = state.getPanel()
+
+		if (!panel) {
+			return
+		}
 
 		if (!isSubtitleFile(document.fileName)) {
 			return
 		}
 
-		// console.log('onDidChangeTextDocument document', document.fileName)
-		// console.log('contentChanges', contentChanges)
-	})
+		if (!contentChanges?.length) {
+			return
+		}
 
+		updateContent(panel, document, contentChanges.map(changeEvent => changeEvent.range))
+	})
 
 	// auto open preview panel when workspace open subtitle file before
 	if (configuration.get('autoOpen') && activeTextEditor && isSubtitleFile(activeTextEditor.document.fileName)) {
 		vscode.commands.executeCommand('subtitleReader.showPreviewPanel')
 	}
 
-	// 注册命令
 	context.subscriptions.push(...[
  		openFile, openFolder, showPanel, refreshPanel, switchPrimaryLang,
  		onDidChangeActiveTextEditor, onDidChangeConfiguration,

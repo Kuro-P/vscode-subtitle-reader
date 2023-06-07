@@ -22,5 +22,6 @@ export interface DialogueEvent {
   primaryText: string
   subsidiaryText?: string
   lineNumber: number
+  rawLineNumber: number
 }
 

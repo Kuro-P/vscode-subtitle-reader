@@ -5,11 +5,11 @@ interface SrtEvent extends DialogueEvent {
   lineOrder?: number | string
 }
 
-class Srt {
+export class Srt {
   dialogues: SrtEvent[] = []
 }
 
-const MIN_EVENT_FIELD_NUM = 3
+export const MIN_EVENT_FIELD_NUM = 3
 
 export function extractSrtInfo (input: string) {
   // split with emplty line
@@ -25,10 +25,12 @@ export function extractSrtInfo (input: string) {
       continue
     }
 
-    const [ lineOrder, timeAxis, ...lineText ] = fields
-    const [ startTime, endTime ] = timeAxis.split(/\s-->\s/)
-    const rawText = lineText.join('\n')
-    const [ primaryText, ...subsidiaryText ] = lineText.map(text => text.replace(/\{.*?\}/g, ''))
+    const lineInfo = extractSrtInfoFromLine(fields)
+    if (!lineInfo) {
+      continue
+    }
+
+    const { lineOrder, startTime, endTime, primaryText, subsidiaryText, rawText } = lineInfo
     const lineNumber = i + 1
 
     let event: SrtEvent = {
@@ -36,14 +38,31 @@ export function extractSrtInfo (input: string) {
       startTime,
       endTime,
       primaryText,
-      subsidiaryText: subsidiaryText.join(''),
+      subsidiaryText,
       rawText,
-      lineNumber
+      lineNumber,
+      rawLineNumber: parseInt(lineOrder as string || '0')
     }
     srtInstance.dialogues.push(event)
   }
 
   return srtInstance
+}
+
+export function extractSrtInfoFromLine(lines: string[]): Pick<SrtEvent, 'lineOrder' |'startTime' | 'endTime' | 'primaryText' | 'subsidiaryText' | 'rawText' > | null {
+  const [ lineOrder, timeAxis, ...lineText ] = lines
+  const [ startTime, endTime ] = timeAxis.split(/\s-->\s/)
+  const rawText = lineText.join('\n')
+  const [ primaryText, ...subsidiaryText ] = lineText.map(text => text.replace(/\{.*?\}/g, ''))
+
+  return {
+    lineOrder,
+    startTime,
+    endTime,
+    primaryText,
+    subsidiaryText: subsidiaryText.join(''),
+    rawText
+  }
 }
 
 

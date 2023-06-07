@@ -23,22 +23,11 @@
     </section>
     {{/if}}
 
-    {{#if scriptInfo}}
-    <section>
-      <h2>[Script Info]</h2>
-      {{#each scriptInfo}}
-      <p>{{ this }}</p>
-      {{/each}}
-    </section>
-    {{/if}}
-
     <section>
       <h2>[Dialogues]</h2>
       {{#each dialogues}}
-      <div class="dialogue">
-        <p>{{ showDialogueLineNumber }}</p>
+      <div class="dialogue" id="{{ rawLineNumber }}" data-raw-line-number="{{ rawLineNumber }}" data-line-number="{{ lineNumber }}">
         <p class="line-number">{{ lineNumber }}</p>
-
         <p class="time">{{ startTime }} —> {{ endTime }}</p>
         <div class="text">
           {{#if primaryText}}

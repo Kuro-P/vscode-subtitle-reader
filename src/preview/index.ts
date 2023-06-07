@@ -2,8 +2,8 @@ import * as vscode from 'vscode'
 import { isSSA, isASS, isSRT, getFileName } from '../common/utils'
 import * as path from 'path'
 import { promises as fsPromises } from "fs"
-import { extractAssInfo } from './ass'
-import { extractSrtInfo } from './srt'
+import { extractAssInfo, extractAssInfoFromLine, Ass } from './ass'
+import { extractSrtInfo, extractSrtInfoFromLine, MIN_EVENT_FIELD_NUM } from './srt'
 import * as Handlebars from 'handlebars'
 import { Panel } from './panel'
 import { context, state, configuration } from './../extension'
@@ -81,6 +81,9 @@ export async function generateHTML(webviewPanel: vscode.WebviewPanel, textDocume
     return '<h3>请检查文件格式是否正确</h3>'
   }
 
+  // record ass field format info
+  state.setContentInstance(contentInstance)
+
   // generate webview HTML
   try {
     const { extensionUri, extensionPath } = context
@@ -108,4 +111,69 @@ export async function generateHTML(webviewPanel: vscode.WebviewPanel, textDocume
       <p>${ e }</p>
     `
   }
+}
+
+export async function updateContent(panel: Panel, textDocument: vscode.TextDocument, changes: vscode.Range[]) {
+  if (!panel || !panel.webviewPanel) {
+    return
+  }
+
+  const contentInstance = state?.getContentInstance()
+  if (!contentInstance) {
+    return
+  }
+
+  changes.forEach((change: vscode.Range) => {
+    const lineStart = change.start.line,
+          lineEnd = change.end.line
+    let rawLineNumber: number = 0
+
+    if (change.isSingleLine) {
+      let lineInfo = null
+      if (isASS(textDocument.languageId)) {
+        lineInfo = extractAssInfoFromLine(textDocument.lineAt(lineStart).text, (contentInstance as Ass).dialogueFormat!)
+        rawLineNumber = lineStart
+      } else if (isSRT(textDocument.languageId)) {
+        const documentLineCount = textDocument.lineCount
+        let lines: string[] = []
+        let curLineText = textDocument.lineAt(lineStart).text
+        let curLineNumber = lineStart
+
+        // find forward
+        while (curLineNumber < documentLineCount && curLineText) {
+          lines.push(curLineText)
+          curLineNumber++
+          curLineText = curLineNumber >= documentLineCount ? '' : textDocument.lineAt(curLineNumber).text
+        }
+
+        // find backward
+        curLineNumber = lineStart - 1
+        curLineText = textDocument.lineAt(curLineNumber).text
+        while (curLineNumber >= 0 && curLineText) {
+          lines.unshift(curLineText)
+          curLineNumber--
+          curLineText = curLineNumber < 0 ? '' : textDocument.lineAt(curLineNumber).text
+        }
+
+        lineInfo = extractSrtInfoFromLine(lines)
+        rawLineNumber = parseInt(lineInfo?.lineOrder as string || '0')
+      }
+
+      if (!lineInfo) {
+        return
+      }
+
+      const htmlStr = `
+      <p class="time">${ lineInfo.startTime } —> ${ lineInfo.endTime }</p>
+      <div class="text">
+        <p class="primary-text">${ lineInfo.primaryText }</p>
+        ${ lineInfo.subsidiaryText ? `<p class="subsidiary-text">${ lineInfo.subsidiaryText }</p>` : '' }
+      </div>
+    `
+
+      panel.updateContent(rawLineNumber, htmlStr)
+    } else {
+      vscode.commands.executeCommand('subtitleReader.refreshPanel')
+    }
+  })
 }

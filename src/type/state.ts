@@ -1,12 +1,12 @@
 import { Panel } from '../preview/panel'
+import { Ass } from '../preview/ass'
+import { Srt } from '../preview/srt'
 
 
 class State {
   protected _panel: Panel | undefined
   protected _switchPrimaryLang: boolean = false
-
-  static getAuthor () {
-  }
+  protected _contentInstance?: Ass | Srt
 
   isCreatedPanel () {
     return !!this._panel
@@ -37,6 +37,14 @@ class State {
 
   getSwitchPrimaryLang () {
     return this._switchPrimaryLang
+  }
+
+  setContentInstance (instance?: Ass | Srt) {
+    this._contentInstance = instance
+  }
+
+  getContentInstance () {
+    return this._contentInstance
   }
 }
 

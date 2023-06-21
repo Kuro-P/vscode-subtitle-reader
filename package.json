@@ -237,16 +237,16 @@
                 "color": {
                   "type": "string"
                 },
-                "fontSize": {
+                "font-size": {
                   "type": "string"
                 },
-                "borderColor": {
+                "border-color": {
                   "type": "string"
                 },
-                "borderWeight": {
+                "border-weight": {
                   "type": "string"
                 },
-                "borderRadius": {
+                "border-radius": {
                   "type": "string"
                 }
               }
@@ -257,7 +257,7 @@
                 "color": {
                   "type": "string"
                 },
-                "fontSize": {
+                "font-size": {
                   "type": "string"
                 }
               }
@@ -268,7 +268,7 @@
                 "color": {
                   "type": "string"
                 },
-                "fontSize": {
+                "font-size": {
                   "type": "string"
                 }
               }
@@ -279,7 +279,7 @@
                 "color": {
                   "type": "string"
                 },
-                "fontSize": {
+                "font-size": {
                   "type": "string"
                 }
               }

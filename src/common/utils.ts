@@ -69,13 +69,38 @@ export function processingStyle(style: StyleConfig): string {
       continue
     }
 
-    cssStr += `
-      ${ curClassName } {
-        ${ Object.keys(curStyle).reduce((prevCSS, curKey) => {
-          return prevCSS + `${ curKey }: ${curStyle[curKey] }; ` } ,'')
+    const cssPropsStr = Object.keys(curStyle).reduce((prevCSS, curKey) => {
+      return prevCSS + `${ curKey }: ${curStyle[curKey] }; `
+    }, '')
+
+    if (el === 'primaryText') {
+      cssStr += `
+        .content[data-lang-primary="primary"] .primary-text {
+          ${ cssPropsStr }
         }
-      }
-    `
+
+        .content[data-lang-primary="secondary"] .secondary-text {
+          ${ cssPropsStr }
+        }
+      `
+    } else if (el === 'secondaryText') {
+      cssStr += `.content[data-lang-primary="primary"] .secondary-text {
+          ${ cssPropsStr }
+        }
+
+        .content[data-lang-primary="secondary"] .primary-text {
+          ${ cssPropsStr }
+        }
+      }`
+    } else {
+      cssStr += `
+        ${ curClassName } {
+          ${ Object.keys(curStyle).reduce((prevCSS, curKey) => {
+            return prevCSS + `${ curKey }: ${curStyle[curKey] }; ` } ,'')
+          }
+        }
+      `
+    }
   }
 
   return cssStr

@@ -167,7 +167,7 @@ export async function updateContent(panel: Panel, textDocument: vscode.TextDocum
       <p class="time">${ lineInfo.startTime } —> ${ lineInfo.endTime }</p>
       <div class="text">
         <p class="primary-text">${ lineInfo.primaryText }</p>
-        ${ lineInfo.subsidiaryText ? `<p class="subsidiary-text">${ lineInfo.subsidiaryText }</p>` : '' }
+        ${ lineInfo.secondaryText ? `<p class="secondary-text">${ lineInfo.secondaryText }</p>` : '' }
       </div>
     `
 

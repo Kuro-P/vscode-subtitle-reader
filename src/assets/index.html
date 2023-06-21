@@ -12,21 +12,24 @@
   <meta http-equiv="Content-Security-Policy" value="default-src 'none'"/>
   <link href="{{ styleUri }}" rel="stylesheet">
   <title>Subtitle preview</title>
+  <style id="customStyle">
+    {{ customStyle }}
+  </style>
 </head>
 <body>
   <p>{{ panelStyleLink }}</p>
   <div class="content" data-lang-primary="primary">
     {{#if fileName}}
     <section>
-      <h2>[File Name]</h2>
-      <p class="title">{{ fileName }}</p>
+      <h2 class="section-title">[File Name]</h2>
+      <p class="file-name">{{ fileName }}</p>
     </section>
     {{/if}}
 
     <section>
-      <h2>[Dialogues]</h2>
+      <h2 class="section-title">[Dialogues]</h2>
       {{#each dialogues}}
-      <div class="dialogue" id="{{ rawLineNumber }}" data-raw-line-number="{{ rawLineNumber }}" data-line-number="{{ lineNumber }}">
+      <div class="dialogue-line" id="{{ rawLineNumber }}" data-raw-line-number="{{ rawLineNumber }}" data-line-number="{{ lineNumber }}">
         <p class="line-number">{{ lineNumber }}</p>
         <p class="time">{{ startTime }} —> {{ endTime }}</p>
         <div class="text">
@@ -34,8 +37,8 @@
           <p class="primary-text">{{ primaryText }}</p>
           {{/if}}
 
-          {{#if subsidiaryText}}
-          <p class="subsidiary-text">{{ subsidiaryText }}</p>
+          {{#if secondaryText}}
+          <p class="secondary-text">{{ secondaryText }}</p>
           {{/if}}
         </div>
       </div>

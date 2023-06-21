@@ -20,7 +20,7 @@ export interface DialogueEvent {
   endTime: string
   rawText: string
   primaryText: string
-  subsidiaryText?: string
+  secondaryText?: string
   lineNumber: number
   rawLineNumber: number
 }

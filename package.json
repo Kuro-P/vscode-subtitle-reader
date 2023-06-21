@@ -33,7 +33,7 @@
       },
       {
         "command": "subtitleReader.showPreviewPanel",
-        "title": "Open Preview to the side",
+        "title": "Open reader panel to the side",
         "category": "Subtitle Reader",
         "icon": {
           "light": "icons/srt-icon.svg",
@@ -42,7 +42,7 @@
       },
       {
         "command": "subtitleReader.refreshPanel",
-        "title": "Refresh Panel",
+        "title": "Refresh panel",
         "category": "Subtitle Reader",
         "icon": {
           "light": "icons/refresh-dark.svg",
@@ -51,12 +51,17 @@
       },
       {
         "command": "subtitleReader.switchPrimaryLang",
-        "title": "Switch Primary Language style",
+        "title": "Switch primary language style",
         "category": "Subtitle Reader",
         "icon": {
           "light": "icons/switch.svg",
           "dark": "icons/switch.svg"
         }
+      },
+      {
+        "command": "subtitleReader.refreshCustomStyle",
+        "title": "Refresh panel custom style",
+        "category": "Subtitle Reader"
       }
     ],
     "menus": {
@@ -189,6 +194,95 @@
                   "type": "string"
                 }
               }
+            },
+            "sectionTitle": {
+              "type": "object",
+              "description": "Custom style for the section title",
+              "properties": {
+                "color": {
+                  "type": "string"
+                },
+                "background": {
+                  "type": "string"
+                }
+              }
+            },
+            "fileName": {
+              "type": "object",
+              "description": "Custom style for the file name",
+              "properties": {
+                "color": {
+                  "type": "string"
+                },
+                "background": {
+                  "type": "string"
+                }
+              }
+            },
+            "dialogue": {
+              "type": "object",
+              "description": "Custom style for dialogue",
+              "properties": {
+                "border": {
+                  "type": "string"
+                },
+                "background": {
+                  "type": "string"
+                }
+              }
+            },
+            "lineNumber": {
+              "type": "object",
+              "properties": {
+                "color": {
+                  "type": "string"
+                },
+                "font-size": {
+                  "type": "string"
+                },
+                "border-color": {
+                  "type": "string"
+                },
+                "border-weight": {
+                  "type": "string"
+                },
+                "border-radius": {
+                  "type": "string"
+                }
+              }
+            },
+            "timeAxis": {
+              "type": "object",
+              "properties": {
+                "color": {
+                  "type": "string"
+                },
+                "font-size": {
+                  "type": "string"
+                }
+              }
+            },
+            "primaryText": {
+              "type": "object",
+              "properties": {
+                "color": {
+                  "type": "string"
+                },
+                "font-size": {
+                  "type": "string"
+                }
+              }
+            },
+            "secondaryText": {
+              "type": "object",
+              "properties": {
+                "color": {
+                  "type": "string"
+                },
+                "font-size": {
+                  "type": "string"
+                }
+              }
             }
           },
           "scope": "resource"
@@ -198,12 +292,11 @@
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",
-    "compile": "NODE_ENV=production webpack --config ./build/webpack.config.js",
-    "watch": "NODE_ENV=development webpack --config ./build/webpack.config.js",
+    "build": "NODE_ENV=production webpack --config ./build/webpack.config.js",
+    "dev": "NODE_ENV=development webpack --config ./build/webpack.config.js --watch",
     "pretest": "yarn run compile && yarn run lint",
     "lint": "eslint src --ext ts",
-    "test": "node ./dist/test/runTest.js",
-    "dev": "NODE_ENV=development webpack --config ./build/webpack.config.js --watch"
+    "test": "node ./dist/test/runTest.js"
   },
   "devDependencies": {
     "@swc/core": "^1.3.58",

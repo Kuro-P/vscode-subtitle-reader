@@ -1,61 +1,63 @@
-body {
+html {
   background: rgb(56, 73, 53);
 }
 
-.title {
+.file-name {
   font-size: 20px;
   color: #d1ad61;
   text-shadow: 0px 1px rgb(255 255 255 / 20%);
   font-weight: bolder;
 }
 
-.content {
-  .dialogue {
-    border: 1px solid sandybrown;
-    margin: 10px 0;
-    padding: 0 10px;
-    display: flex;
-    align-items: center;
-    &:hover {
-      background: rgba(0, 0, 0, 0.2);
+.dialogue-line {
+  border: 1px solid sandybrown;
+  margin: 10px 0;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  &:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.line-number {
+  font-weight: bold;
+  color: aliceblue;
+  font-size: 13px;
+  border-right: 2px solid currentColor;
+  padding-right: 6px;
+  margin-right: 4px;
+  height: 20px;
+  line-height: 20px;
+  border-radius: 10px;
+}
+
+.time {
+  width: 190px;
+  text-align: center;
+  padding-right: 10px;
+  margin-right: 10px;
+  border-right: 1px solid sandybrown;
+  font-size: 15px;
+  white-space: break-spaces;
+}
+
+.text {
+  flex: 1;
+  color: #bdf36a;
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  p {
+    margin: 0;
+    width: 100%;
+    &:first-child {
+      margin-bottom: 5px;
     }
-    .line-number {
-      font-weight: bold;
-      color: aliceblue;
-      font-size: 13px;
-      border-right: 2px solid currentColor;
-      padding-right: 6px;
-      margin-right: 4px;
-      height: 20px;
-      line-height: 20px;
-      border-radius: 10px;
-    }
-    .time {
-      width: 190px;
-      text-align: center;
-      padding-right: 10px;
-      margin-right: 10px;
-      border-right: 1px solid sandybrown;
-      font-size: 15px;
-      white-space: break-spaces;
-    }
-    .text {
-      color: #bdf36a;
-      padding: 12px 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      align-items: center;
-      p {
-        margin: 0;
-        width: 100%;
-        &:first-child {
-          margin-bottom: 5px;
-        }
-        &:only-child {
-          margin-bottom: 0;
-        }
-      }
+    &:only-child {
+      margin-bottom: 0;
     }
   }
 }
@@ -64,7 +66,7 @@ body {
   font-size: 16px;
 }
 
-%subsidiary-text {
+%secondary-text {
   font-size: 13px;
   color: #c0de9b;
 }
@@ -73,16 +75,16 @@ body {
   .primary-text {
     @extend %primary-text;
   }
-  .subsidiary-text {
-    @extend %subsidiary-text;
+  .secondary-text {
+    @extend %secondary-text;
   }
 }
 
-.content[data-lang-primary="subsidiary"] {
+.content[data-lang-primary="secondary"] {
   .primary-text {
-    @extend %subsidiary-text;
+    @extend %secondary-text;
   }
-  .subsidiary-text {
+  .secondary-text {
     @extend %primary-text;
   }
 }

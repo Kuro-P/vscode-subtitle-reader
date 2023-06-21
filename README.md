@@ -12,11 +12,15 @@ yarn dev
 ```
 Click `Run and debug` button on sider bar, select `Run Extension` Option and run, it will open an debug window.
 
+## Preview
+
+![](https://github.com/Kuro-P/vscode-subtitle-reader/blob/master/images/extension-screenshot.png "extension screeenshot") 
+
 ## TODO
-- [ ] [preview panel] content layout and style
-- [ ] [preview panel] panel style setting
+- [x] [preview panel] content layout and style
+- [x] [preview panel] panel style setting
 - [x] [preview panel] panel auto open setting
-- [ ] [preview panel] sync content when actived document changed
+- [x] [preview panel] panel auto close setting
+- [x] [preview panel] sync content when actived document changed
 - [ ] [preview panel] sync document and panel scroll position 
-- [ ] [preview panel] and more 🤯....
-- [ ] [extension assets] subtitle file icons
+- [ ] [extension assets] extension icons

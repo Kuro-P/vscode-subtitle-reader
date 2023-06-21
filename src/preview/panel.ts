@@ -53,6 +53,12 @@ class Panel implements PanelInstance {
       }
     })
   }
+
+  updateStyle(cssText: string) {
+    this.webview.postMessage({
+      updateStyle: cssText.trim()
+    })
+  }
 }
 
 export { Panel, PanelInstance }

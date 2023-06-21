@@ -30,7 +30,7 @@ export function extractSrtInfo (input: string) {
       continue
     }
 
-    const { lineOrder, startTime, endTime, primaryText, subsidiaryText, rawText } = lineInfo
+    const { lineOrder, startTime, endTime, primaryText, secondaryText, rawText } = lineInfo
     const lineNumber = i + 1
 
     let event: SrtEvent = {
@@ -38,7 +38,7 @@ export function extractSrtInfo (input: string) {
       startTime,
       endTime,
       primaryText,
-      subsidiaryText,
+      secondaryText,
       rawText,
       lineNumber,
       rawLineNumber: parseInt(lineOrder as string || '0')
@@ -49,18 +49,18 @@ export function extractSrtInfo (input: string) {
   return srtInstance
 }
 
-export function extractSrtInfoFromLine(lines: string[]): Pick<SrtEvent, 'lineOrder' |'startTime' | 'endTime' | 'primaryText' | 'subsidiaryText' | 'rawText' > | null {
+export function extractSrtInfoFromLine(lines: string[]): Pick<SrtEvent, 'lineOrder' |'startTime' | 'endTime' | 'primaryText' | 'secondaryText' | 'rawText' > | null {
   const [ lineOrder, timeAxis, ...lineText ] = lines
   const [ startTime, endTime ] = timeAxis.split(/\s-->\s/)
   const rawText = lineText.join('\n')
-  const [ primaryText, ...subsidiaryText ] = lineText.map(text => text.replace(/\{.*?\}/g, ''))
+  const [ primaryText, ...secondaryText ] = lineText.map(text => text.replace(/\{.*?\}/g, ''))
 
   return {
     lineOrder,
     startTime,
     endTime,
     primaryText,
-    subsidiaryText: subsidiaryText.join(''),
+    secondaryText: secondaryText.join(''),
     rawText
   }
 }

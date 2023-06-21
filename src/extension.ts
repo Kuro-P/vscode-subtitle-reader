@@ -1,7 +1,7 @@
 import * as vscode from 'vscode'
 import * as path from 'path'
 import { displayPreviewPanel, updateContent } from './preview'
-import { isSubtitleFile, getFileName } from './common/utils'
+import { isSubtitleFile, getFileName, processingStyle } from './common/utils'
 import State from './type/state'
 
 export let context: vscode.ExtensionContext
@@ -45,6 +45,7 @@ export function activate(c: vscode.ExtensionContext) {
 		const panel = await displayPreviewPanel(cachePanel)
 		state.setPanel(panel)
 
+		vscode.commands.executeCommand('subtitleReader.refreshCustomStyle')
 		if (textEditor.document.uri.fsPath !== cachePanel?.fileUri?.fsPath) {
 			panel.resetAppearance()
 		}
@@ -53,8 +54,6 @@ export function activate(c: vscode.ExtensionContext) {
 	// refresh reader panel
 	const refreshPanel = vscode.commands.registerCommand('subtitleReader.refreshPanel', async () => {
 		// !!! unlike showPanel, refresh action was trigger by panel focus, so vscode.window.activeTextEditor was undefined at here.
-		console.log('refreshPanel')
-
 		const cachePanel = state.getPanel()
 		if (!cachePanel || !cachePanel.fileUri) {
 			return
@@ -63,6 +62,7 @@ export function activate(c: vscode.ExtensionContext) {
 		const textDocument = await vscode.workspace.openTextDocument(cachePanel.fileUri)
 		const panel = await displayPreviewPanel(cachePanel, undefined, textDocument)
 		state.setPanel(panel)
+		vscode.commands.executeCommand('subtitleReader.refreshCustomStyle')
 	})
 
 	// switch primary lang style
@@ -72,6 +72,20 @@ export function activate(c: vscode.ExtensionContext) {
 			return vscode.window.showWarningMessage('Not found activated reader panel.')
 		}
 		panel.switchPrimaryLang()
+	})
+
+	// refresh custom style
+	const refreshCustomStyle = vscode.commands.registerCommand('subtitleReader.refreshCustomStyle', () => {
+		const panel = state.getPanel()
+		if (!panel) {
+			return vscode.window.showWarningMessage('Not found activated reader panel.')
+		}
+
+		// get lastest configuration
+		configuration.flush()
+
+		const cssText = processingStyle((configuration.get('style') as any))
+		panel.updateStyle(cssText)
 	})
 
 	// auto open reader panel
@@ -107,14 +121,10 @@ export function activate(c: vscode.ExtensionContext) {
 			return
 		}
 
-		configuration.flush()
-		if (event.affectsConfiguration('subtitleReader.style')) {
-			// console.log('style change', configuration.get('style').get('html'))
-		}
+		vscode.commands.executeCommand('subtitleReader.refreshCustomStyle')
 	})
 
-	// TODO sync context changes
-	// document text change
+	// document content change
 	const onDidChangeTextDocument = vscode.workspace.onDidChangeTextDocument((event: vscode.TextDocumentChangeEvent) => {
 		const { document, contentChanges } = event
 		const panel = state.getPanel()
@@ -134,13 +144,30 @@ export function activate(c: vscode.ExtensionContext) {
 		updateContent(panel, document, contentChanges.map(changeEvent => changeEvent.range))
 	})
 
+	// document scroll
+	// const onDidChangeTextEditorVisibleRanges = vscode.window.onDidChangeTextEditorVisibleRanges((event: vscode.TextEditorVisibleRangesChangeEvent) => {
+	// 	const { textEditor: { document }, visibleRanges } = event
+	// 	const panel = state.getPanel()
+
+	// 	if (!panel) {
+	// 		return
+	// 	}
+
+	// 	if (!isSubtitleFile(document.fileName)) {
+	// 		return
+	// 	}
+
+	// 	// TODO
+
+	// })
+
 	// auto open preview panel when workspace open subtitle file before
 	if (configuration.get('autoOpen') && activeTextEditor && isSubtitleFile(activeTextEditor.document.fileName)) {
 		vscode.commands.executeCommand('subtitleReader.showPreviewPanel')
 	}
 
 	context.subscriptions.push(...[
- 		openFile, openFolder, showPanel, refreshPanel, switchPrimaryLang,
+ 		openFile, openFolder, showPanel, refreshPanel, switchPrimaryLang, refreshCustomStyle,
  		onDidChangeActiveTextEditor, onDidChangeConfiguration,
 		onDidOpenTextDocument, onDidChangeTextDocument
 	])

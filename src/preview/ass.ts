@@ -83,7 +83,7 @@ export function extractAssInfo (input: string) {
           continue
         }
 
-        const { startTime, endTime, primaryText, subsidiaryText, rawText } = lineInfo
+        const { startTime, endTime, primaryText, secondaryText, rawText } = lineInfo
         const lineNumber = assInstance.dialogues.length + 1,
               rawLineNumber = i
 
@@ -91,7 +91,7 @@ export function extractAssInfo (input: string) {
           startTime,
           endTime,
           primaryText,
-          subsidiaryText,
+          secondaryText,
           rawText,
           lineNumber,
           rawLineNumber
@@ -104,7 +104,7 @@ export function extractAssInfo (input: string) {
   return assInstance
 }
 
-export function extractAssInfoFromLine(line: string, format: AssDialogueFormat): Pick<AssEvent, 'startTime' | 'endTime' | 'primaryText' | 'subsidiaryText' | 'rawText'> | null {
+export function extractAssInfoFromLine(line: string, format: AssDialogueFormat): Pick<AssEvent, 'startTime' | 'endTime' | 'primaryText' | 'secondaryText' | 'rawText'> | null {
   if (!format) {
     return null
   }
@@ -119,7 +119,7 @@ export function extractAssInfoFromLine(line: string, format: AssDialogueFormat):
       dialogFields[textIdx] :
       dialogFields.slice(textIdx).join(',')
 
-  const [ primaryText, subsidiaryText ] = rawText.split(/\\N/).map(str => str.replace(/\{.*?\}/g, ''))
+  const [ primaryText, secondaryText ] = rawText.split(/\\N/).map(str => str.replace(/\{.*?\}/g, ''))
   const startTime = dialogFields[startIdx],
         endTime = dialogFields[endIdx]
 
@@ -127,7 +127,7 @@ export function extractAssInfoFromLine(line: string, format: AssDialogueFormat):
     startTime,
     endTime,
     primaryText,
-    subsidiaryText,
+    secondaryText,
     rawText
   }
 }

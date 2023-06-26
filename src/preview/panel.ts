@@ -56,7 +56,8 @@ class Panel implements PanelInstance {
 
   updateStyle(cssText: string) {
     this.webview.postMessage({
-      updateStyle: cssText.trim()
+      // use a blank space to clear style text
+      updateStyle: cssText.trim() || ' '
     })
   }
 }

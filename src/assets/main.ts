@@ -38,7 +38,6 @@ function handleUpdateStyle(cssText: string) {
   // style.appendChild(document.createTextNode(cssText))
 
   const customStyleEl = document.getElementById('customStyle')
-  console.log('customStyleEl', customStyleEl)
   if (customStyleEl) {
     customStyleEl.innerText = cssText
   }

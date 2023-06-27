@@ -22,5 +22,5 @@ Click `Run and debug` button on sider bar, select `Run Extension` Option and run
 - [x] [preview panel] panel auto open setting
 - [x] [preview panel] panel auto close setting
 - [x] [preview panel] sync content when actived document changed
-- [ ] [preview panel] sync document and panel scroll position 
+- [x] [preview panel] sync document and panel scroll position 
 - [ ] [extension assets] extension icons

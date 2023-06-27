@@ -60,6 +60,15 @@ class Panel implements PanelInstance {
       updateStyle: cssText.trim() || ' '
     })
   }
+
+  syncScroll(rawLineStart: number, rawLineEnd: number) {
+    this.webview.postMessage({
+      syncScroll: {
+        start: rawLineStart,
+        end: rawLineEnd
+      }
+    })
+  }
 }
 
 export { Panel, PanelInstance }

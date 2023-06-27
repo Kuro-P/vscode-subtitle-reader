@@ -7,13 +7,13 @@ class compileCallbackPlugin {
       'Compile calllback plugin',
       (stats) => {
         if (!stats.hasErrors()) {
-          console.log('——————————————————📚 Successful Compile 💄——————————————————');
+          console.log('——————————————————📚 Compiled Successfully 💄——————————————————')
         }
       }
-    );
+    )
   }
 }
 
 module.exports = {
   compileCallbackPlugin
-};
+}

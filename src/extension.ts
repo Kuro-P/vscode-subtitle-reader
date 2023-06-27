@@ -1,7 +1,7 @@
 import * as vscode from 'vscode'
 import * as path from 'path'
-import { displayPreviewPanel, updateContent } from './preview'
-import { isSubtitleFile, getFileName, processingStyle } from './common/utils'
+import { displayPreviewPanel, updateContent, getSRTDialogueLine } from './preview'
+import { isSubtitleFile, getFileName, processingStyle, isASS, isSRT } from './common/utils'
 import State from './type/state'
 
 export let context: vscode.ExtensionContext
@@ -83,7 +83,6 @@ export function activate(c: vscode.ExtensionContext) {
 
 		// get lastest configuration
 		configuration.flush()
-
 		const cssText = processingStyle((configuration.get('style') as any))
 		panel.updateStyle(cssText)
 	})
@@ -117,11 +116,9 @@ export function activate(c: vscode.ExtensionContext) {
 	// configuration change
 	const onDidChangeConfiguration = vscode.workspace.onDidChangeConfiguration((event: vscode.ConfigurationChangeEvent) => {
 		if (!event.affectsConfiguration('subtitleReader')) {
-			console.log('修改的并非是 subtitle reader的配置')
 			return
 		}
-
-		vscode.commands.executeCommand('subtitleReader.refreshCustomStyle')
+		vscode.commands.executeCommand('subtitleReader.refreshPanel')
 	})
 
 	// document content change
@@ -145,21 +142,29 @@ export function activate(c: vscode.ExtensionContext) {
 	})
 
 	// document scroll
-	// const onDidChangeTextEditorVisibleRanges = vscode.window.onDidChangeTextEditorVisibleRanges((event: vscode.TextEditorVisibleRangesChangeEvent) => {
-	// 	const { textEditor: { document }, visibleRanges } = event
-	// 	const panel = state.getPanel()
+	const onDidChangeTextEditorVisibleRanges = vscode.window.onDidChangeTextEditorVisibleRanges((event: vscode.TextEditorVisibleRangesChangeEvent) => {
+		const { textEditor: { document }, visibleRanges } = event
+		const panel = state.getPanel()
 
-	// 	if (!panel) {
-	// 		return
-	// 	}
+		if (!panel) {
+			return
+		}
 
-	// 	if (!isSubtitleFile(document.fileName)) {
-	// 		return
-	// 	}
+		if (!isSubtitleFile(document.fileName)) {
+			return
+		}
 
-	// 	// TODO
-
-	// })
+		if (isASS(document.languageId)) {
+			panel.syncScroll(visibleRanges[0]?.start.line, visibleRanges[0]?.end.line)
+		} else if (isSRT(document.languageId)) {
+			try {
+				const srtLine = getSRTDialogueLine(document, visibleRanges[0])
+				panel.syncScroll(srtLine.start, srtLine.end)
+			} catch (e: any) {
+				console.error('srtLine error', e.message)
+			}
+		}
+	})
 
 	// auto open preview panel when workspace open subtitle file before
 	if (configuration.get('autoOpen') && activeTextEditor && isSubtitleFile(activeTextEditor.document.fileName)) {
@@ -169,7 +174,7 @@ export function activate(c: vscode.ExtensionContext) {
 	context.subscriptions.push(...[
  		openFile, openFolder, showPanel, refreshPanel, switchPrimaryLang, refreshCustomStyle,
  		onDidChangeActiveTextEditor, onDidChangeConfiguration,
-		onDidOpenTextDocument, onDidChangeTextDocument
+		onDidOpenTextDocument, onDidChangeTextDocument, onDidChangeTextEditorVisibleRanges,
 	])
 }
 

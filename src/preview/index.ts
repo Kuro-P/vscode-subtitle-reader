@@ -3,7 +3,7 @@ import { isSSA, isASS, isSRT, getFileName } from '../common/utils'
 import * as path from 'path'
 import { promises as fsPromises } from "fs"
 import { extractAssInfo, extractAssInfoFromLine, Ass } from './ass'
-import { extractSrtInfo, extractSrtInfoFromLine, MIN_EVENT_FIELD_NUM } from './srt'
+import { extractSrtInfo, extractSrtInfoFromLine } from './srt'
 import * as Handlebars from 'handlebars'
 import { Panel } from './panel'
 import { context, state, configuration } from './../extension'
@@ -176,4 +176,34 @@ export async function updateContent(panel: Panel, textDocument: vscode.TextDocum
       vscode.commands.executeCommand('subtitleReader.refreshPanel')
     }
   })
+}
+
+export function getSRTDialogueLine(textDocument: vscode.TextDocument, range: vscode.Range) {
+  let startLine = range.start.line,
+      endLine = range.end.line
+
+  let startLineText = textDocument.lineAt(startLine).text,
+      endLineText = textDocument.lineAt(endLine).text
+
+  let dialogueStartNumber = 0,
+      dialogueEndNumber = 0
+
+  while (startLineText) {
+    startLine++
+    startLineText = textDocument.lineAt(startLine).text
+  }
+
+  // avoid tail empty line
+  while (endLineText || endLine >= textDocument.lineCount - 2) {
+    endLine--
+    endLineText = textDocument.lineAt(endLine).text
+  }
+
+  dialogueStartNumber = parseInt(textDocument.lineAt(startLine + 1).text) - 1
+  dialogueEndNumber = parseInt(textDocument.lineAt(endLine + 1).text)
+
+  return {
+    start: isNaN(dialogueStartNumber) ? dialogueEndNumber : dialogueStartNumber,
+    end: dialogueEndNumber
+  }
 }

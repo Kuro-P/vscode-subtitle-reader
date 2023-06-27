@@ -1,7 +1,8 @@
 import './main.scss'
 
-console.info('hello preview js xixixi')
-
+let firstLineRawNumber = 0,
+    lastLineRawNumber = 0,
+    curLineNumber = 0
 
 function handleLangStyleSwitch(langPrimary?: 'primary' | 'secondary' ) {
   const contentEl: HTMLDivElement | null = document.querySelector('.content')
@@ -31,26 +32,60 @@ function handleUpdateContent(change: { rawLineNumber: number, text: string }) {
 }
 
 function handleUpdateStyle(cssText: string) {
-  // const head = document.head || document.querySelector('head'),
-  //       style = document.createElement('style')
-
-  // head.appendChild(style)
-  // style.appendChild(document.createTextNode(cssText))
-
   const customStyleEl = document.getElementById('customStyle')
-  console.log('customStyleEl', customStyleEl)
   if (customStyleEl) {
     customStyleEl.innerText = cssText
+  }
+}
+
+function handleSyncScroll(options: { start: number, end: number }) {
+  const { start, end } = options
+  if (start < firstLineRawNumber) {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  } else if ( firstLineRawNumber <= start && start < lastLineRawNumber ) {
+    let dialogueEl = document.getElementById(String(start))
+    let _start = start
+
+    while (!dialogueEl) {
+      if (start > curLineNumber) {
+        // scroll down
+        _start++
+      } else {
+        // scroll up
+        _start--
+      }
+      dialogueEl = document.getElementById(String(_start))
+    }
+    dialogueEl.scrollIntoView({ behavior: start <= firstLineRawNumber ? 'smooth' : 'auto' })
   }
 }
 
 // listen lines style change
 window.addEventListener('message', (event: any) => {
   const message = event.data
-  const { switchPrimaryLang, resetAppearance, updateContent, updateStyle } = message
+  const {
+    switchPrimaryLang, resetAppearance, updateContent, updateStyle,
+    syncScroll } = message
 
   switchPrimaryLang && handleLangStyleSwitch()
   resetAppearance && handleResetAppearance()
   updateContent && handleUpdateContent(updateContent)
   updateStyle && handleUpdateStyle(updateStyle)
+  syncScroll && handleSyncScroll(syncScroll)
 })
+
+window.onload = () => {
+  console.log('window.onload')
+  try {
+    const dialogues = Array.prototype.slice.call(document.querySelectorAll('.dialogue-line'))
+    if (dialogues.length > 0) {
+      firstLineRawNumber = dialogues.at(0).dataset.rawLineNumber
+      lastLineRawNumber = dialogues.at(-1).dataset.rawLineNumber
+    }
+  } catch (e: any) {
+    console.log('Failed to get dialogues', e.message)
+  }
+}

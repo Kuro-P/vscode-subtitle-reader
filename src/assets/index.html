@@ -28,21 +28,24 @@
 
     <section>
       <h2 class="section-title">[Dialogues]</h2>
-      {{#each dialogues}}
-      <div class="dialogue-line" id="{{ rawLineNumber }}" data-raw-line-number="{{ rawLineNumber }}" data-line-number="{{ lineNumber }}">
-        <p class="line-number">{{ lineNumber }}</p>
-        <p class="time">{{ startTime }} —> {{ endTime }}</p>
-        <div class="text">
-          {{#if primaryText}}
-          <p class="primary-text">{{ primaryText }}</p>
-          {{/if}}
+      <div class="dialogue-wrapper {{#if showDialogueLineNumber }}with-line-number{{/if}}">
+        {{#each dialogues}}
+        <div class="dialogue-line" id="{{ rawLineNumber }}" data-raw-line-number="{{ rawLineNumber }}" data-line-number="{{ lineNumber }}">
+          <p class="line-number">{{ lineNumber }}</p>
 
-          {{#if secondaryText}}
-          <p class="secondary-text">{{ secondaryText }}</p>
-          {{/if}}
+          <p class="time">{{ startTime }} —> {{ endTime }}</p>
+          <div class="text">
+            {{#if primaryText}}
+            <p class="primary-text">{{ primaryText }}</p>
+            {{/if}}
+
+            {{#if secondaryText}}
+            <p class="secondary-text">{{ secondaryText }}</p>
+            {{/if}}
+          </div>
         </div>
+        {{/each}}
       </div>
-      {{/each}}
     </section>
   </div>
 

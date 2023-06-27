@@ -118,8 +118,7 @@ export function activate(c: vscode.ExtensionContext) {
 		if (!event.affectsConfiguration('subtitleReader')) {
 			return
 		}
-
-		vscode.commands.executeCommand('subtitleReader.refreshCustomStyle')
+		vscode.commands.executeCommand('subtitleReader.refreshPanel')
 	})
 
 	// document content change
@@ -175,7 +174,7 @@ export function activate(c: vscode.ExtensionContext) {
 	context.subscriptions.push(...[
  		openFile, openFolder, showPanel, refreshPanel, switchPrimaryLang, refreshCustomStyle,
  		onDidChangeActiveTextEditor, onDidChangeConfiguration,
-		onDidOpenTextDocument, onDidChangeTextDocument
+		onDidOpenTextDocument, onDidChangeTextDocument, onDidChangeTextEditorVisibleRanges,
 	])
 }
 

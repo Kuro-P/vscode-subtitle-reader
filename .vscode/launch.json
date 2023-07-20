@@ -2,6 +2,7 @@
 // Use IntelliSense to learn about possible attributes.
 // Hover to view descriptions of existing attributes.
 // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+// more variables: https://code.visualstudio.com/docs/editor/variables-reference
 {
 	"version": "0.2.0",
 	"configurations": [
@@ -10,24 +11,28 @@
 			"type": "extensionHost",
 			"request": "launch",
 			"args": [
+				"${workspaceRoot}/testFiles",
 				"--extensionDevelopmentPath=${workspaceFolder}",
 			],
 			"outFiles": [
 				"${workspaceFolder}/dist/**/*.js"
-			]
+			],
+			"preLaunchTask": "Run Build"
 		},
 		{
-			"name": "Extension Tests",
+			"name": "Dev Extension",
 			"type": "extensionHost",
 			"request": "launch",
+			"runtimeExecutable": "${execPath}",
 			"args": [
-				"--extensionDevelopmentPath=${workspaceFolder}",
-				"--extensionTestsPath=${workspaceFolder}"
+				"${workspaceRoot}/testFiles",
+				"--extensionDevelopmentPath=${workspaceFolder}"
 			],
 			"outFiles": [
-				"${workspaceFolder}/dist/test/**/*.js"
+				"${workspaceFolder}/dist/**/*.js"
 			],
-			"preLaunchTask": "${defaultBuildTask}"
+			"preLaunchTask": "Run Dev",
+			"postDebugTask": "Run Terminate All Tasks"
 		}
 	]
 }

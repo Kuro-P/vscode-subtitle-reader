@@ -4,17 +4,65 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"type": "npm",
-			"script": "watch",
-			"problemMatcher": "$tsc-watch",
-			"isBackground": true,
+			"label": "Run Build",
+			"type": "shell",
+			"command": "yarn build",
 			"presentation": {
-				"reveal": "never"
+				"reveal": "always",
+				"revealProblems": "onProblem",
+				"clear": true
+			}
+		},
+		{
+			"label": "Run Dev",
+			"type": "shell",
+			"command": "yarn dev",
+			"presentation": {
+				"reveal": "always",
+				// if revealProblems' value is always, then PROBLEMS Panle will always focus but not TERMINAL
+				"revealProblems": "onProblem",
+				"clear": true
 			},
 			"group": {
 				"kind": "build",
 				"isDefault": true
-			}
+			},
+			// You should set true for isBackground value so that the task keeps running in the background, or problemMatcher won't woking.
+			// see https://stackoverflow.com/a/66788877/11458222
+			"isBackground": true,
+			// see https://code.visualstudio.com/docs/editor/tasks#_defining-a-problem-matcher
+			"problemMatcher": [
+				{
+					"owner": "webpack",
+					"pattern": {
+						"regexp": "__________________"
+					},
+					"background": {
+						"activeOnStart": true,
+						// this is printed in the console when rollup starts compiling
+						"beginsPattern": "^.*extensionCompile.*compiled successfully.*$",
+						// this is printed in the console when rollup finishes
+						"endsPattern": "^.*webCompile.*compiled successfully.*$"
+					}
+				}
+			]
+		},
+		{
+			"label": "Run Terminate All Tasks",
+			"type": "shell",
+			"command": "echo ${input:terminate}",
+			"problemMatcher": []
 		}
+	],
+	// still can't find specific doc, just see in official documatation demo
+	// see https://code.visualstudio.com/docs/editor/variables-reference#_input-variables below
+	// and stackoverflow: https://stackoverflow.com/a/60330174/11458222
+	"inputs": [
+    {
+      "id": "terminate",
+      "type": "command",
+      "command": "workbench.action.tasks.terminate",
+      "args": "terminateAll"
+    }
 	]
 }

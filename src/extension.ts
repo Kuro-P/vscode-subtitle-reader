@@ -13,26 +13,8 @@ export function activate(c: vscode.ExtensionContext) {
 	context = c
 	state = new State()
 	configuration = new Configuration()
-	console.log('Congratulations, your extension "helloVscode" is now active!')
-	console.log('vscode.window.activeTextEditor uri', vscode.window.activeTextEditor?.document.fileName)
+	
 	const activeTextEditor = vscode.window.activeTextEditor
-
-	// open file
-	const openFile = vscode.commands.registerCommand('subtitleReader.helloFile', () => {
-		vscode.window.showErrorMessage('Hello File xixixi from VS Code')
-		vscode.workspace.openTextDocument(path.join(context.extensionPath, '/test/Tags.ass')).then(doc => {
-			vscode.window.showTextDocument(doc)
-		})
-	})
-
-	// open Folder
-	const openFolder = vscode.commands.registerCommand('subtitleReader.helloFolder', () => {
-		const folderPath = path.join(context.extensionPath, '/test')
-		const folderPathParsed = folderPath.split(`\\`).join(`/`)
-		// Updated Uri.parse to Uri.file
-		const folderUri = vscode.Uri.file(folderPathParsed)
-		vscode.commands.executeCommand(`vscode.openFolder`, folderUri)
-	})
 
 	// open reader panel
 	const showPanel = vscode.commands.registerCommand('subtitleReader.showPreviewPanel', async () => {
@@ -166,13 +148,21 @@ export function activate(c: vscode.ExtensionContext) {
 		}
 	})
 
-	// auto open preview panel when workspace open subtitle file before
+
 	if (configuration.get('autoOpen') && activeTextEditor && isSubtitleFile(activeTextEditor.document.fileName)) {
 		vscode.commands.executeCommand('subtitleReader.showPreviewPanel')
 	}
 
+	// auto open preview panel when workspace open subtitle file before last time vscode closed
+	if (configuration.get('autoOpen')) {
+		const activeTextEditor = vscode.window.activeTextEditor
+		if (activeTextEditor && isSubtitleFile(activeTextEditor.document.fileName)) {
+			vscode.commands.executeCommand('subtitleReader.showPreviewPanel')
+		}
+	}
+
 	context.subscriptions.push(...[
- 		openFile, openFolder, showPanel, refreshPanel, switchPrimaryLang, refreshCustomStyle,
+ 		showPanel, refreshPanel, switchPrimaryLang, refreshCustomStyle,
  		onDidChangeActiveTextEditor, onDidChangeConfiguration,
 		onDidOpenTextDocument, onDidChangeTextDocument, onDidChangeTextEditorVisibleRanges,
 	])

@@ -1,11 +1,12 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { SRC_DIR, DIST_DIR } = require('./const');
-const { compileCallbackPlugin } = require('./plugin');
+const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { SRC_DIR, DIST_DIR } = require('./const')
+const { compileCallbackPlugin } = require('./plugin')
 
-const mode = process.env.NODE_ENV || 'production';
-const isDev = mode === 'development';
+const mode = process.env.NODE_ENV || 'production'
+const isDev = mode === 'development'
 
+console.log('Node -v', process.version)
 
 const extensionConfig = {
   name: 'extensionCompile',
@@ -67,7 +68,7 @@ const extensionConfig = {
       },
     ]
   }
-};
+}
 
 
 const webConfig = {
@@ -174,8 +175,8 @@ const webConfig = {
           limit: isDev ? 512000 : 200000,
           name: '[name].[ext]',
           outputPath: (fname, fpath, context) => {
-            const relative = path.relative(context, fpath);
-            return `/${relative}`;
+            const relative = path.relative(context, fpath)
+            return `/${relative}`
           },
           publicPath: '/imgs/',
         },
@@ -188,7 +189,7 @@ const webConfig = {
     }),
     new compileCallbackPlugin()
   ],
-};
+}
 
 
-module.exports = [ extensionConfig, webConfig ];
+module.exports = [ extensionConfig, webConfig ]

@@ -78,7 +78,6 @@ window.addEventListener('message', (event: any) => {
 })
 
 window.onload = () => {
-  console.log('window.onload')
   try {
     const dialogues = Array.prototype.slice.call(document.querySelectorAll('.dialogue-line'))
     if (dialogues.length > 0) {

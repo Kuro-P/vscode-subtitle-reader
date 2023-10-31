@@ -33,6 +33,18 @@
 			],
 			"preLaunchTask": "Run Dev",
 			"postDebugTask": "Run Terminate All Tasks"
+		},
+		{
+			"name": "Run Extension Only",
+			"type": "extensionHost",
+			"request": "launch",
+			"args": [
+				"${workspaceRoot}/testFiles",
+				"--extensionDevelopmentPath=${workspaceFolder}",
+			],
+			"outFiles": [
+				"${workspaceFolder}/dist/**/*.js"
+			]
 		}
 	]
 }

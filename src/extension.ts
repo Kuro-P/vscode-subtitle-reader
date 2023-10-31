@@ -13,8 +13,6 @@ export function activate(c: vscode.ExtensionContext) {
 	context = c
 	state = new State()
 	configuration = new Configuration()
-	
-	const activeTextEditor = vscode.window.activeTextEditor
 
 	// open reader panel
 	const showPanel = vscode.commands.registerCommand('subtitleReader.showPreviewPanel', async () => {
@@ -147,11 +145,6 @@ export function activate(c: vscode.ExtensionContext) {
 			}
 		}
 	})
-
-
-	if (configuration.get('autoOpen') && activeTextEditor && isSubtitleFile(activeTextEditor.document.fileName)) {
-		vscode.commands.executeCommand('subtitleReader.showPreviewPanel')
-	}
 
 	// auto open preview panel when workspace open subtitle file before last time vscode closed
 	if (configuration.get('autoOpen')) {

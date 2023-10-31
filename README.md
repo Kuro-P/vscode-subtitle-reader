@@ -1,10 +1,10 @@
 # vscode-subtitle-reader
 
-A tool for enhance the reading experience of subtitle files..
+A tool for enhance the reading experience of subtitle files.
 
 ## Features
-* syntaxes highlight (`.ass`, `.ssa`, `.srt`) 
-* support preview panel (like markdown all in one)
+* Syntaxes highlight (`.ass`, `.ssa`, `.srt`) 
+* Support preview panel (like `markdown-all-in-one`)
 
 ## Develop
 ```

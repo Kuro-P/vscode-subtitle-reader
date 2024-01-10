@@ -38,6 +38,15 @@ function handleUpdateStyle(cssText: string) {
   }
 }
 
+/**
+ * refresh style
+ * @param kind 1-lightTheme  2|3-darkTheme
+ */
+function handleUpdateColorTheme(kind: number) {
+  const links = document.querySelectorAll('link[rel=stylesheet]') as NodeListOf<HTMLLinkElement>
+  links.forEach(link => link.href = link.href.replace(/\?.*|$/, "?" + Date.now()))
+}
+
 function handleSyncScroll(options: { start: number, end: number }) {
   const { start, end } = options
   if (start < firstLineRawNumber) {
@@ -63,17 +72,30 @@ function handleSyncScroll(options: { start: number, end: number }) {
   }
 }
 
+/**
+ * https://code.visualstudio.com/api/references/vscode-api#ColorThemeKind
+ * Light-1 Dark-2
+ */
+function detectColorTheme() {
+  if (document.body.className.includes('light')) {
+    return 1
+  } else {
+    return 2
+  }
+}
+
 // listen lines style change
 window.addEventListener('message', (event: any) => {
   const message = event.data
   const {
-    switchPrimaryLang, resetAppearance, updateContent, updateStyle,
+    switchPrimaryLang, resetAppearance, updateContent, updateStyle, updateColorTheme,
     syncScroll } = message
 
   switchPrimaryLang && handleLangStyleSwitch()
   resetAppearance && handleResetAppearance()
   updateContent && handleUpdateContent(updateContent)
   updateStyle && handleUpdateStyle(updateStyle)
+  updateColorTheme && handleUpdateColorTheme(updateColorTheme)
   syncScroll && handleSyncScroll(syncScroll)
 })
 

@@ -61,6 +61,12 @@ class Panel implements PanelInstance {
     })
   }
 
+  updateColorTheme(kind: number) {
+    this.webview.postMessage({
+      updateColorTheme: kind
+    })
+  }
+
   syncScroll(rawLineStart: number, rawLineEnd: number) {
     this.webview.postMessage({
       syncScroll: {

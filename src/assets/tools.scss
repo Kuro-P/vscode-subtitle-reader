@@ -1,0 +1,26 @@
+// check user current color theme
+@mixin if-dark {
+  @at-root {
+    // !!! Attention if-dark scope shouldn't beyond body element
+    body[data-vscode-theme-kind="vscode-dark"] & {
+      @content;
+    }
+    body[data-vscode-theme-kind="vscode-high-contrast"] & {
+      @content;
+    }
+  }
+}
+
+@mixin color($color, $dark-color) {
+  color: $color;
+  @include if-dark {
+    color: $dark-color;
+  }
+}
+
+@mixin background-color($color, $dark-color) {
+  background-color: $color;
+  @include if-dark {
+    background-color: $dark-color;
+  }
+}

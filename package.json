@@ -24,8 +24,8 @@
         "title": "Open reader panel to the side",
         "category": "Subtitle Reader",
         "icon": {
-          "light": "icons/srt-icon.svg",
-          "dark": "icons/srt-icon.svg"   
+          "light": "icons/panel.svg",
+          "dark": "icons/panel.svg"
         }
       },
       {
@@ -33,8 +33,8 @@
         "title": "Refresh panel",
         "category": "Subtitle Reader",
         "icon": {
-          "light": "icons/refresh-dark.svg",
-          "dark": "icons/refresh-light.svg"
+          "light": "icons/refresh.svg",
+          "dark": "icons/refresh.svg"
         }
       },
       {
@@ -86,8 +86,8 @@
         "mimetypes": [],
         "configuration": "./syntaxes/language-configuration.json",
         "icon": {
-          "light": "./icons/ass-icon.svg",
-          "dark": "./icons/ass-icon.svg"
+          "light": "./icons/ass-icon-light.svg",
+          "dark": "./icons/ass-icon-dark.svg"
         }
       },
       {
@@ -105,8 +105,8 @@
         ],
         "configuration": "./syntaxes/language-configuration.json",
         "icon": {
-          "light": "./icons/srt-icon.svg",
-          "dark": "./icons/srt-icon.svg"
+          "light": "./icons/srt-icon-light.svg",
+          "dark": "./icons/srt-icon-dark.svg"
         }
       }
     ],
@@ -281,8 +281,12 @@
   },
   "scripts": {
     "vscode:prepublish": "yarn run build",
-    "build": "NODE_ENV=production webpack --config ./build/webpack.config.js",
-    "dev": "NODE_ENV=development webpack --config ./build/webpack.config.js --watch",
+    "build": "yarn build-extension & yarn build-panel",
+    "build-extension": "NODE_ENV=production webpack --config ./build/webpack.extension.js",
+    "build-panel": "NODE_ENV=production webpack --config ./build/webpack.panel.js",
+    "dev": "yarn dev-extension & yarn dev-panel",
+    "dev-extension": "NODE_ENV=development webpack --config ./build/webpack.extension.js",
+    "dev-panel": "NODE_ENV=development webpack serve --config ./build/webpack.panel.js",
     "lint": "eslint src --ext ts"
   },
   "devDependencies": {
@@ -294,6 +298,7 @@
     "@typescript-eslint/eslint-plugin": "^5.59.1",
     "@typescript-eslint/parser": "^5.59.1",
     "autoprefixer": "^10.4.14",
+    "chalk": "4.1.2",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.3",
     "eslint": "^8.39.0",
@@ -311,6 +316,7 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.82.1",
     "webpack-cli": "^5.1.1",
+    "webpack-dev-server": "^5.0.4",
     "webpack-merge": "^5.8.0"
   }
 }

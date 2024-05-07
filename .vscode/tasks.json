@@ -14,6 +14,36 @@
 			}
 		},
 		{
+			"label": "Run Build Extension",
+			"type": "shell",
+			"command": "yarn build-extension",
+			"presentation": {
+				"reveal": "always",
+				"revealProblems": "onProblem",
+				"clear": true
+			}
+		},
+		{
+			"label": "Run Build Panel",
+			"type": "shell",
+			"command": "yarn build-panel",
+			"presentation": {
+				"reveal": "always",
+				"revealProblems": "onProblem",
+				"clear": true
+			}
+		},
+		{
+			"label": "Run Dev Extension",
+			"type": "shell",
+			"command": "yarn dev-extension",
+			"presentation": {
+				"reveal": "always",
+				"revealProblems": "onProblem",
+				"clear": true
+			}
+		},
+		{
 			"label": "Run Dev",
 			"type": "shell",
 			"command": "yarn dev",

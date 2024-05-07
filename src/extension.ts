@@ -13,8 +13,6 @@ export function activate(c: vscode.ExtensionContext) {
 	context = c
 	state = new State()
 	configuration = new Configuration()
-	
-	const activeTextEditor = vscode.window.activeTextEditor
 
 	// open reader panel
 	const showPanel = vscode.commands.registerCommand('subtitleReader.showPreviewPanel', async () => {
@@ -103,6 +101,18 @@ export function activate(c: vscode.ExtensionContext) {
 		vscode.commands.executeCommand('subtitleReader.refreshPanel')
 	})
 
+	// color theme change
+	const onDidChangeActiveColorTheme = vscode.window.onDidChangeActiveColorTheme((event: vscode.ColorTheme) => {
+		const { kind } = event
+
+		const panel = state.getPanel()
+		if (!panel) {
+			return vscode.window.showWarningMessage('Not found activated reader panel.')
+		}
+
+		panel.updateColorTheme(kind)
+	})
+
 	// document content change
 	const onDidChangeTextDocument = vscode.workspace.onDidChangeTextDocument((event: vscode.TextDocumentChangeEvent) => {
 		const { document, contentChanges } = event
@@ -148,11 +158,6 @@ export function activate(c: vscode.ExtensionContext) {
 		}
 	})
 
-
-	if (configuration.get('autoOpen') && activeTextEditor && isSubtitleFile(activeTextEditor.document.fileName)) {
-		vscode.commands.executeCommand('subtitleReader.showPreviewPanel')
-	}
-
 	// auto open preview panel when workspace open subtitle file before last time vscode closed
 	if (configuration.get('autoOpen')) {
 		const activeTextEditor = vscode.window.activeTextEditor
@@ -163,7 +168,7 @@ export function activate(c: vscode.ExtensionContext) {
 
 	context.subscriptions.push(...[
  		showPanel, refreshPanel, switchPrimaryLang, refreshCustomStyle,
- 		onDidChangeActiveTextEditor, onDidChangeConfiguration,
+ 		onDidChangeActiveTextEditor, onDidChangeConfiguration, onDidChangeActiveColorTheme,
 		onDidOpenTextDocument, onDidChangeTextDocument, onDidChangeTextEditorVisibleRanges,
 	])
 }

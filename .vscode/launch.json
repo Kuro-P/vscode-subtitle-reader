@@ -35,7 +35,7 @@
 			"postDebugTask": "Run Terminate All Tasks"
 		},
 		{
-			"name": "Run Extension Only",
+			"name": "Dev Extension Only",
 			"type": "extensionHost",
 			"request": "launch",
 			"args": [
@@ -44,7 +44,8 @@
 			],
 			"outFiles": [
 				"${workspaceFolder}/dist/**/*.js"
-			]
+			],
+			"preLaunchTask": "Run Dev Extension"
 		}
 	]
 }

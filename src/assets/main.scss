@@ -8,13 +8,14 @@
 }
 
 .dialogue-line {
-  border: 1px solid sandybrown;
-  margin: 10px 0;
-  padding: 0 10px;
+  margin: 14px 0;
+  padding: 4px 10px;
   display: flex;
   align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
   &:hover {
-    @include background-color(rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.2))
+    @include background-color(rgba(0, 0, 0, 0.03), rgba(255, 255, 255, 0.3))
   }
 }
 

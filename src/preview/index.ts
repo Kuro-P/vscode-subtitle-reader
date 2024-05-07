@@ -1,6 +1,7 @@
 import * as vscode from 'vscode'
 import { isSSA, isASS, isSRT, getFileName } from '../common/utils'
 import * as path from 'path'
+import { isDev, DEV_PORT } from '../../build/const'
 import { promises as fsPromises } from "fs"
 import { extractAssInfo, extractAssInfoFromLine, Ass } from './ass'
 import { extractSrtInfo, extractSrtInfoFromLine } from './srt'
@@ -36,11 +37,12 @@ export function createPreviewPanel(options?: PanelOptions): vscode.WebviewPanel 
     viewType = "subtitlePreviewPanel",
     title = "Subtitle preview panel",
     viewColumn = vscode.ViewColumn.Beside,
+    // vscode asset trust path
     localResourceRoots = [ context.extensionUri ]
   } = options || {}
 
   const webviewPanel = vscode.window.createWebviewPanel(
-    // id
+    // pannel id
     viewType,
     // name
     title,
@@ -92,7 +94,7 @@ export async function generateHTML(webviewPanel: vscode.WebviewPanel, textDocume
     const scriptUri = webviewPanel.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'dist', 'main.js'))
     const showDialogueLineNumber = configuration.get('showDialogueLineNumber')
 
-    const panelParams = Object.assign({}, contentInstance, {
+    let panelParams = Object.assign({}, contentInstance, {
       fileName,
       styleUri,
       scriptUri,
@@ -100,6 +102,12 @@ export async function generateHTML(webviewPanel: vscode.WebviewPanel, textDocume
       // cspSource: webviewPanel.webview.cspSource,
       // nonce: getNonce(),
     })
+
+    if (isDev) {
+      const _host = `http://localhost:${ DEV_PORT }`
+      panelParams.styleUri = styleUri.toString().replace(/.*(\/\w*.css)$/, `${_host}$1`)
+      panelParams.scriptUri = scriptUri.toString().replace(/.*(\/\w*.js)$/, `${_host}$1`)
+    }
 
     const template = Handlebars.compile(panelTempl)
     const panelContent = template(panelParams)

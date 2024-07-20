@@ -110,3 +110,7 @@ window.onload = () => {
     console.log('Failed to get dialogues', e.message)
   }
 }
+
+if (module.hot) {
+  module.hot.accept()
+}

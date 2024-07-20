@@ -1,27 +1,27 @@
 # vscode-subtitle-reader
 
-Tools to improve subtitle files Readability.
+A tool to enhance the readability of subtitle files.
 
 ## Features
 * Syntaxes highlight (`.ass`, `.ssa`, `.srt`) 
-* Preview panel (like `markdown-all-in-one`)
+* Panel with good readability
 
 ## Develop
-1. start Panel server
+1. dev panel
 
 ```sh
-yarn dev-panel
+yarn dev-panel # start a server and automatically refresh compiled files.
 ```
 
-2. start Extension server
+1. dev extension
   
-Click the sidebar button `Run and debug`, run option `Run Extension Only`. it will open an debug window with test files.
+Run option `Run Dev Extension`, open a debugging window with test files.
 
-### Other command
-- Run Extension: build panel & extension
-- Dev Extension: dev panel & extension
-- Run Extension only: build extension
-- Dev Extension only: dev extension
+### Other options
+- Run Build: build panel & extension
+- Run Build Extension: build extension
+- Run Build Panel: build panel
+- Run Dev Extension: dev extension
 
 ## Preview
 
@@ -35,5 +35,4 @@ Click the sidebar button `Run and debug`, run option `Run Extension Only`. it wi
 - [x] [preview panel] sync content when actived document changed
 - [x] [preview panel] sync document and panel scroll position 
 - [x] [preview panel] panel code hot reload
-- [ ] [preview panel] memory manage
 - [ ] [extension assets] extension icons

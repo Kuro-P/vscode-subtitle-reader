@@ -3,8 +3,8 @@
 A tool to enhance the readability of subtitle files.
 
 ## Features
-* Syntaxes highlight (`.ass`, `.ssa`, `.srt`) 
-* Panel with good readability
+* Subtitle files syntaxes highlight (`.ass`, `.ssa`, `.srt`).
+* A panel with good readability
 
 ## Develop
 1. dev panel
@@ -17,11 +17,9 @@ yarn dev-panel # start a server and automatically refresh compiled files.
   
 Run option `Run Dev Extension`, open a debugging window with test files.
 
-### Other options
+### Other Launch options
 - Run Build: build panel & extension
-- Run Build Extension: build extension
-- Run Build Panel: build panel
-- Run Dev Extension: dev extension
+- Run Dev: dev panel & extension
 
 ## Preview
 

@@ -1,7 +1,7 @@
 {
   "name": "subtitle-reader",
   "displayName": "subtitle-reader",
-  "description": "A tool for enhance the reading experience of subtitle files.",
+  "description": "A tool to enhance the readability of subtitle files.",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.78.0"
@@ -280,7 +280,7 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "yarn run build",
+    "vscode:prepublish": "yarn build",
     "build": "yarn build-extension & yarn build-panel",
     "build-extension": "NODE_ENV=production webpack --config ./build/webpack.extension.js",
     "build-panel": "NODE_ENV=production webpack --config ./build/webpack.panel.js",

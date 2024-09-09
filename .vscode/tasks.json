@@ -4,7 +4,7 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "Run Build",
+			"label": "Build All",
 			"type": "shell",
 			"command": "yarn build",
 			"presentation": {
@@ -14,7 +14,7 @@
 			}
 		},
 		{
-			"label": "Run Build Extension",
+			"label": "Build Extension",
 			"type": "shell",
 			"command": "yarn build-extension",
 			"presentation": {
@@ -24,7 +24,7 @@
 			}
 		},
 		{
-			"label": "Run Build Panel",
+			"label": "Build Panel",
 			"type": "shell",
 			"command": "yarn build-panel",
 			"presentation": {
@@ -34,17 +34,7 @@
 			}
 		},
 		{
-			"label": "Run Dev Extension",
-			"type": "shell",
-			"command": "yarn dev-extension",
-			"presentation": {
-				"reveal": "always",
-				"revealProblems": "onProblem",
-				"clear": true
-			}
-		},
-		{
-			"label": "Run Dev",
+			"label": "Dev All",
 			"type": "shell",
 			"command": "yarn dev",
 			"presentation": {
@@ -76,6 +66,26 @@
 					}
 				}
 			]
+		},
+		{
+			"label": "Dev Extension",
+			"type": "shell",
+			"command": "yarn dev-extension",
+			"presentation": {
+				"reveal": "always",
+				"revealProblems": "onProblem",
+				"clear": true
+			}
+		},
+		{
+			"label": "Dev Panel",
+			"type": "shell",
+			"command": "yarn dev-panel",
+			"presentation": {
+				"reveal": "always",
+				"revealProblems": "onProblem",
+				"clear": true
+			}
 		},
 		{
 			"label": "Run Terminate All Tasks",

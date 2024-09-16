@@ -1,0 +1,13 @@
+
+<svg width="29px" height="25px" viewBox="0 0 29 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon-for-sutitle-reader-(dark-mode)" transform="translate(-53.000000, -43.000000)">
+            <g id="srt-icon" transform="translate(53.500000, 43.000000)">
+                <rect id="Rectangle" x="0.5" y="0" width="25" height="25"></rect>
+                <text id="SRT" font-family="BMHANNAProOTF, BM Hanna Pro" font-size="12.5" font-weight="bold" letter-spacing="0.998931944" fill="#A299F9">
+                    <tspan x="0" y="17.5">SRT</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

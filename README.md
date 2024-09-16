@@ -4,7 +4,8 @@ A tool to enhance the readability of subtitle files.
 
 ## Features
 * Subtitle files syntaxes highlight (`.ass`, `.ssa`, `.srt`).
-* A panel with good readability
+* Subtitle files icons support.
+* A preview panel with better readability.
 
 ## Develop
 1. dev panel

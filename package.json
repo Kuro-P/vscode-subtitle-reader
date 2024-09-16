@@ -24,8 +24,8 @@
         "title": "Open reader panel to the side",
         "category": "Subtitle Reader",
         "icon": {
-          "light": "icons/panel.svg",
-          "dark": "icons/panel.svg"
+          "light": "icons/preview-light-mode.svg",
+          "dark": "icons/preview-dark-mode.svg"
         }
       },
       {
@@ -33,8 +33,8 @@
         "title": "Refresh panel",
         "category": "Subtitle Reader",
         "icon": {
-          "light": "icons/refresh.svg",
-          "dark": "icons/refresh.svg"
+          "light": "icons/refresh-light-mode.svg",
+          "dark": "icons/refresh-dark-mode.svg"
         }
       },
       {
@@ -42,8 +42,8 @@
         "title": "Switch primary language style",
         "category": "Subtitle Reader",
         "icon": {
-          "light": "icons/switch.svg",
-          "dark": "icons/switch.svg"
+          "light": "icons/exchange-light-mode.svg",
+          "dark": "icons/exchange-dark-mode.svg"
         }
       },
       {
@@ -82,12 +82,24 @@
           ".ass",
           ".ssa"
         ],
-        "filenames": [],
-        "mimetypes": [],
         "configuration": "./syntaxes/language-configuration.json",
         "icon": {
-          "light": "./icons/ass-icon-light.svg",
-          "dark": "./icons/ass-icon-dark.svg"
+          "light": "./icons/ass-light-mode.svg",
+          "dark": "./icons/ass-dark-mode.svg"
+        }
+      },
+      {
+        "id": "ssa",
+        "aliases": [
+          "SSA"
+        ],
+        "extensions": [
+          ".ssa"
+        ],
+        "configuration": "./syntaxes/language-configuration.json",
+        "icon": {
+          "light": "./icons/ssa-light-mode.svg",
+          "dark": "./icons/ssa-dark-mode.svg"
         }
       },
       {
@@ -105,8 +117,8 @@
         ],
         "configuration": "./syntaxes/language-configuration.json",
         "icon": {
-          "light": "./icons/srt-icon-light.svg",
-          "dark": "./icons/srt-icon-dark.svg"
+          "light": "./icons/srt-light-mode.svg",
+          "dark": "./icons/srt-dark-mode.svg"
         }
       }
     ],
@@ -114,6 +126,11 @@
       {
         "language": "ass",
         "scopeName": "source.ass",
+        "path": "./syntaxes/ass.tmLanguage.json"
+      },
+      {
+        "language": "ssa",
+        "scopeName": "source.ssa",
         "path": "./syntaxes/ass.tmLanguage.json"
       },
       {

@@ -11,14 +11,14 @@
   }
 }
 
-@mixin color($color, $dark-color) {
+@mixin color($dark-color, $color) {
   color: $color;
   @include if-dark {
     color: $dark-color;
   }
 }
 
-@mixin background-color($color, $dark-color) {
+@mixin background-color($dark-color, $color) {
   background-color: $color;
   @include if-dark {
     background-color: $dark-color;

@@ -1,8 +1,8 @@
 {
   "name": "subtitle-reader",
   "displayName": "subtitle-reader",
-  "description": "A tool for enhance the reading experience of subtitle files.",
-  "version": "0.0.1",
+  "description": "A tool to enhance the readability of subtitle files.",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.78.0"
   },
@@ -12,8 +12,6 @@
     "Other"
   ],
   "activationEvents": [
-    "onLanguage:ssa",
-    "onLanguage:aas",
     "workspaceContains:*.(ass|ssa|srt)"
   ],
   "main": "./dist/extension.js",
@@ -21,11 +19,11 @@
     "commands": [
       {
         "command": "subtitleReader.showPreviewPanel",
-        "title": "Open reader panel to the side",
+        "title": "Open reader panel",
         "category": "Subtitle Reader",
         "icon": {
-          "light": "icons/panel.svg",
-          "dark": "icons/panel.svg"
+          "light": "icons/preview-light-mode.svg",
+          "dark": "icons/preview-dark-mode.svg"
         }
       },
       {
@@ -33,8 +31,8 @@
         "title": "Refresh panel",
         "category": "Subtitle Reader",
         "icon": {
-          "light": "icons/refresh.svg",
-          "dark": "icons/refresh.svg"
+          "light": "icons/refresh-light-mode.svg",
+          "dark": "icons/refresh-dark-mode.svg"
         }
       },
       {
@@ -42,8 +40,8 @@
         "title": "Switch primary language style",
         "category": "Subtitle Reader",
         "icon": {
-          "light": "icons/switch.svg",
-          "dark": "icons/switch.svg"
+          "light": "icons/switch-light-mode.svg",
+          "dark": "icons/switch-dark-mode.svg"
         }
       },
       {
@@ -82,12 +80,24 @@
           ".ass",
           ".ssa"
         ],
-        "filenames": [],
-        "mimetypes": [],
         "configuration": "./syntaxes/language-configuration.json",
         "icon": {
-          "light": "./icons/ass-icon-light.svg",
-          "dark": "./icons/ass-icon-dark.svg"
+          "light": "./icons/ass-light-mode.svg",
+          "dark": "./icons/ass-dark-mode.svg"
+        }
+      },
+      {
+        "id": "ssa",
+        "aliases": [
+          "SSA"
+        ],
+        "extensions": [
+          ".ssa"
+        ],
+        "configuration": "./syntaxes/language-configuration.json",
+        "icon": {
+          "light": "./icons/ssa-light-mode.svg",
+          "dark": "./icons/ssa-dark-mode.svg"
         }
       },
       {
@@ -105,8 +115,8 @@
         ],
         "configuration": "./syntaxes/language-configuration.json",
         "icon": {
-          "light": "./icons/srt-icon-light.svg",
-          "dark": "./icons/srt-icon-dark.svg"
+          "light": "./icons/srt-light-mode.svg",
+          "dark": "./icons/srt-dark-mode.svg"
         }
       }
     ],
@@ -114,6 +124,11 @@
       {
         "language": "ass",
         "scopeName": "source.ass",
+        "path": "./syntaxes/ass.tmLanguage.json"
+      },
+      {
+        "language": "ssa",
+        "scopeName": "source.ssa",
         "path": "./syntaxes/ass.tmLanguage.json"
       },
       {
@@ -128,7 +143,7 @@
         "subtitleReader.autoOpen": {
           "type": "boolean",
           "default": true,
-          "description": "Automatically open the reader panel when an subtitle (.ass, .srt) file is opened.",
+          "description": "Automatically open the reader panel when an subtitle (.ass, .ssa, .srt) file is opened.",
           "scope": "resource"
         },
         "subtitleReader.autoClose": {
@@ -280,7 +295,7 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "yarn run build",
+    "vscode:prepublish": "yarn build",
     "build": "yarn build-extension & yarn build-panel",
     "build-extension": "NODE_ENV=production webpack --config ./build/webpack.extension.js",
     "build-panel": "NODE_ENV=production webpack --config ./build/webpack.panel.js",
@@ -295,6 +310,7 @@
     "@types/mocha": "^10.0.1",
     "@types/node": "16.x",
     "@types/vscode": "^1.78.0",
+    "@types/webpack-env": "^1.18.5",
     "@typescript-eslint/eslint-plugin": "^5.59.1",
     "@typescript-eslint/parser": "^5.59.1",
     "autoprefixer": "^10.4.14",

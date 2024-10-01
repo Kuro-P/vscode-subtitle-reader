@@ -1,39 +1,35 @@
 # vscode-subtitle-reader
 
-Tools to improve subtitle files Readability.
+A tool to enhance the readability of subtitle files.
 
 ## Features
-* Syntaxes highlight (`.ass`, `.ssa`, `.srt`) 
-* Preview panel (like `markdown-all-in-one`)
+* Subtitle files syntaxes highlight (`.ass`, `.ssa`, `.srt`).
+* Subtitle files icons support.
+* A preview panel with better readability.
 
-## Develop
-1. start Panel server
+### Preview
 
-```sh
-yarn dev-panel
-```
+Support for both light and dark GitHub themes.
 
-2. start Extension server
-  
-Click the sidebar button `Run and debug`, run option `Run Extension Only`. it will open an debug window with test files.
+<img src="./images/extension-preview-dark-mode.png" alt="dark-mode">
 
-### Other command
-- Run Extension: build panel & extension
-- Dev Extension: dev panel & extension
-- Run Extension only: build extension
-- Dev Extension only: dev extension
+<br />
 
-## Preview
+<img src="./images/extension-preview-light-mode.png" alt="light-mode">
 
-![](https://github.com/Kuro-P/vscode-subtitle-reader/blob/master/images/extension-screenshot.png "extension screeenshot") 
+## Usage
 
-## TODO
-- [x] [preview panel] content layout and style
-- [x] [preview panel] panel style setting
-- [x] [preview panel] panel auto open setting
-- [x] [preview panel] panel auto close setting
-- [x] [preview panel] sync content when actived document changed
-- [x] [preview panel] sync document and panel scroll position 
-- [x] [preview panel] panel code hot reload
-- [ ] [preview panel] memory manage
-- [ ] [extension assets] extension icons
+### Extension guide
+<img src="./images/extension-file-icon.png" alt="extension-file-icon" width="400">
+
+### Panel guide
+<img src="./images/reader-panel-icon.png" alt="reader-panel-icon" width="400">
+
+## Configuration
+
+- `subtitleReader.autoOpen`: Automatically open the reader panel when an subtitle (.ass, .ssa, .srt) file is opened.
+- `subtitleReader.autoClose`: Automatically close the reader panel when other file is opened.
+- `subtitleReader.showDialogueLineNumber`: Display line number of dialogues.
+- `subtitleReader.style`: Custom style for the reader panel.
+
+

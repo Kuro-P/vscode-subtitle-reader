@@ -7,7 +7,7 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Run Extension",
+			"name": "Run Build",
 			"type": "extensionHost",
 			"request": "launch",
 			"args": [
@@ -17,10 +17,23 @@
 			"outFiles": [
 				"${workspaceFolder}/dist/**/*.js"
 			],
-			"preLaunchTask": "Run Build"
+			"preLaunchTask": "Build All"
 		},
 		{
-			"name": "Dev Extension",
+			"name": "Run Dev",
+			"type": "extensionHost",
+			"request": "launch",
+			"args": [
+				"${workspaceRoot}/testFiles",
+				"--extensionDevelopmentPath=${workspaceFolder}",
+			],
+			"outFiles": [
+				"${workspaceFolder}/dist/**/*.js"
+			],
+			"preLaunchTask": "Dev All"
+		},
+		{
+			"name": "Run Dev Extension",
 			"type": "extensionHost",
 			"request": "launch",
 			"runtimeExecutable": "${execPath}",
@@ -31,11 +44,10 @@
 			"outFiles": [
 				"${workspaceFolder}/dist/**/*.js"
 			],
-			"preLaunchTask": "Run Dev",
-			"postDebugTask": "Run Terminate All Tasks"
+			"preLaunchTask": "Dev Extension"
 		},
 		{
-			"name": "Dev Extension Only",
+			"name": "Run Build Extension",
 			"type": "extensionHost",
 			"request": "launch",
 			"args": [
@@ -45,7 +57,7 @@
 			"outFiles": [
 				"${workspaceFolder}/dist/**/*.js"
 			],
-			"preLaunchTask": "Run Dev Extension"
+			"preLaunchTask": "Build Extension"
 		}
 	]
 }

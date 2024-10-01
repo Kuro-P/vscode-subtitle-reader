@@ -2,7 +2,7 @@
   "name": "subtitle-reader",
   "displayName": "subtitle-reader",
   "description": "A tool to enhance the readability of subtitle files.",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.78.0"
   },
@@ -12,8 +12,6 @@
     "Other"
   ],
   "activationEvents": [
-    "onLanguage:ssa",
-    "onLanguage:aas",
     "workspaceContains:*.(ass|ssa|srt)"
   ],
   "main": "./dist/extension.js",
@@ -21,7 +19,7 @@
     "commands": [
       {
         "command": "subtitleReader.showPreviewPanel",
-        "title": "Open reader panel to the side",
+        "title": "Open reader panel",
         "category": "Subtitle Reader",
         "icon": {
           "light": "icons/preview-light-mode.svg",
@@ -42,8 +40,8 @@
         "title": "Switch primary language style",
         "category": "Subtitle Reader",
         "icon": {
-          "light": "icons/exchange-light-mode.svg",
-          "dark": "icons/exchange-dark-mode.svg"
+          "light": "icons/switch-light-mode.svg",
+          "dark": "icons/switch-dark-mode.svg"
         }
       },
       {
@@ -145,7 +143,7 @@
         "subtitleReader.autoOpen": {
           "type": "boolean",
           "default": true,
-          "description": "Automatically open the reader panel when an subtitle (.ass, .srt) file is opened.",
+          "description": "Automatically open the reader panel when an subtitle (.ass, .ssa, .srt) file is opened.",
           "scope": "resource"
         },
         "subtitleReader.autoClose": {

@@ -11,19 +11,19 @@ A tool to enhance the readability of subtitle files.
 
 Support for both light and dark GitHub themes.
 
-<img src="./images/extension-preview-dark-mode.png" alt="dark-mode">
+<img src="./images/preview_dark.png" alt="dark mode">
 
 <br />
 
-<img src="./images/extension-preview-light-mode.png" alt="light-mode">
+<img src="./images/preview_light.png" alt="light mode">
 
 ## Usage
 
 ### Extension guide
-<img src="./images/extension-file-icon.png" alt="extension-file-icon" width="400">
+<img src="./images/extension_icon.png" alt="extension icon" width="400">
 
 ### Panel guide
-<img src="./images/reader-panel-icon.png" alt="reader-panel-icon" width="400">
+<img src="./images/reader_panel_icon.png" alt="reader panel icon" width="400">
 
 ## Configuration
 

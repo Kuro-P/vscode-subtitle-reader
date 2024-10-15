@@ -1,5 +1,6 @@
 const path = require('path')
 const chalk = require('chalk')
+const copyPlugin = require("copy-webpack-plugin")
 const { SRC_DIR, DIST_DIR, mode, isDev } = require('./const')
 
 console.log(chalk.bgMagenta(`start compile extension (dev mode: ${ isDev })`))
@@ -64,7 +65,16 @@ const extensionConfig = {
         }
       },
     ]
-  }
+  },
+  plugins: [
+    new copyPlugin({
+      patterns: [
+        {
+          from: 'src/assets/index.html'
+        },
+      ],
+    }),
+  ]
 }
 
 module.exports = extensionConfig

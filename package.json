@@ -1,11 +1,15 @@
 {
   "name": "subtitle-reader",
-  "displayName": "subtitle-reader",
+  "displayName": "Subtitle Reader",
   "description": "A tool to enhance the readability of subtitle files.",
+  "repository": "https://github.com/Kuro-P/vscode-subtitle-reader",
+  "icon": "icons/logo.png",
   "version": "0.1.1",
+  "publisher": "SubtitleReader",
   "engines": {
     "vscode": "^1.78.0"
   },
+  "license": "MIT",
   "categories": [
     "Programming Languages",
     "Formatters",
@@ -316,6 +320,7 @@
     "autoprefixer": "^10.4.14",
     "chalk": "4.1.2",
     "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^6.7.3",
     "eslint": "^8.39.0",
     "glob": "^8.1.0",

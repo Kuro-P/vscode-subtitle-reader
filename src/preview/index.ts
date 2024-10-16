@@ -89,7 +89,10 @@ export async function generateHTML(webviewPanel: vscode.WebviewPanel, textDocume
   // generate webview HTML
   try {
     const { extensionUri, extensionPath } = context
-    const panelTempl = await fsPromises.readFile(path.join(extensionPath, '/src/assets/index.html'), { encoding: 'utf-8' })
+    const panelTempl = await fsPromises.readFile(
+      path.join(extensionPath, isDev ? '/src/assets/index.html' : '/dist/index.html'),
+      { encoding: 'utf-8' }
+    )
     const styleUri = webviewPanel.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'dist', 'main.css'))
     const scriptUri = webviewPanel.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'dist', 'main.js'))
     const showDialogueLineNumber = configuration.get('showDialogueLineNumber')

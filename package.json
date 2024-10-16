@@ -4,6 +4,10 @@
   "description": "A tool to enhance the readability of subtitle files.",
   "repository": "https://github.com/Kuro-P/vscode-subtitle-reader",
   "icon": "icons/logo.png",
+  "galleryBanner": {
+    "color": "#282c34",
+    "theme": "dark"
+  },
   "version": "0.1.1",
   "publisher": "SubtitleReader",
   "engines": {

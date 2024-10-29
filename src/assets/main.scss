@@ -1,15 +1,15 @@
-@import './tools.scss';
+@use './tools.scss' as tools;
 
 .file-name {
   font-size: 22px;
   font-weight: bolder;
-  @include color(#A299F9, #4037C6);
+  @include tools.color(#A299F9, #4037C6);
 }
 
 .section-title {
   font-size: 18px;
   margin-bottom: 20px;
-  @include color(#A299F9, #4037C6);
+  @include tools.color(#A299F9, #4037C6);
 }
 
 .dialogue-line {
@@ -18,10 +18,10 @@
   margin: 14px 0;
   padding: 4px 10px;
   border-radius: 6px;
-  @include color(rgba(#fff, 0.75), rgba(#5046E6, 0.75));
-  @include background-color(rgba(#A299F9, 0.15), rgba(#F0EAFF, 0.75));
+  @include tools.color(rgba(#fff, 0.75), rgba(#5046E6, 0.75));
+  @include tools.background-color(rgba(#A299F9, 0.15), rgba(#F0EAFF, 0.75));
   &:hover {
-    @include background-color(rgba(#A299F9, 0.10), rgba(#F0EAFF, 1));
+    @include tools.background-color(rgba(#A299F9, 0.10), rgba(#F0EAFF, 1));
   }
 }
 
@@ -76,7 +76,7 @@
 %primary-text {
   font-size: 16px;
   font-weight: bold;
-  @include color(rgba(#fff, 1), rgba(#5046E6, 1))
+  @include tools.color(rgba(#fff, 1), rgba(#5046E6, 1))
 }
 
 %secondary-text {

@@ -8,7 +8,7 @@
     "color": "#282c34",
     "theme": "dark"
   },
-  "version": "0.1.1",
+  "version": "0.1.2",
   "publisher": "SubtitleReader",
   "engines": {
     "vscode": "^1.78.0"
@@ -304,7 +304,7 @@
   },
   "scripts": {
     "vscode:prepublish": "yarn build",
-    "build": "yarn build-extension & yarn build-panel",
+    "build": "yarn build-extension && yarn build-panel",
     "build-extension": "NODE_ENV=production webpack --config ./build/webpack.extension.js",
     "build-panel": "NODE_ENV=production webpack --config ./build/webpack.panel.js",
     "dev": "yarn dev-extension & yarn dev-panel",
@@ -331,6 +331,7 @@
     "handlebars": "^4.7.7",
     "mini-css-extract-plugin": "^2.7.5",
     "mocha": "^10.2.0",
+    "postcss": "^8.4",
     "postcss-loader": "^7.3.0",
     "postcss-preset-env": "^8.3.2",
     "sass": "^1.62.1",

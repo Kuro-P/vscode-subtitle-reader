@@ -1,0 +1,56 @@
+name: Build & Publish
+run-name: Deploy to vscode marketplace by @${{ github.actor }}
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  version-check:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.check.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      
+      - name: Check if version has been updated
+        id: check
+        uses: EndBug/version-check@v2
+        with:
+          file-url: https://raw.githubusercontent.com/Kuro-P/vscode-subtitle-reader/refs/heads/master/package.json
+          static-checking: localIsNew
+
+      - name: Log when changed
+        if: steps.check.outputs.changed == 'true'
+        run: 'echo "Version change found in commit ${{ steps.check.outputs.commit }}! New version: ${{ steps.check.outputs.version }} (${{ steps.check.outputs.type }})"'
+
+      - name: Log when unchanged
+        if: steps.check.outputs.changed == 'false'
+        run: echo "No version change :("
+
+
+  build_and_publish:
+    needs: version-check
+    if: ${{ needs.version-check.outputs.changed == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+      
+      - name: Install dependencies
+        run: |
+          yarn
+          yarn global add @vscode/vsce
+          vsce -V
+
+      - name: Publish to marketplace
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+        run: |
+          vsce publish
+          echo "🍏 This job's status is ${{ job.status }}."

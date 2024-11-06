@@ -1,5 +1,7 @@
 # vscode-subtitle-reader
 
+![workflow](https://github.com/Kuro-P/vscode-subtitle-reader/actions/workflows/publish.yml/badge.svg)
+
 A tool to enhance the readability of subtitle files.
 
 ## Features

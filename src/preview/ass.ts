@@ -32,7 +32,6 @@ export function extractAssInfo (input: string) {
 
     // empty line
     if (!line || line.trim() === '') {
-      curSection = undefined
       continue
     }
 

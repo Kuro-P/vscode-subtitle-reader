@@ -189,6 +189,9 @@ export async function updateContent(panel: Panel, textDocument: vscode.TextDocum
   })
 }
 
+/**
+ * .srt files use subtitle index numbers to identify panel view line counts.
+ */
 export function getSRTDialogueLine(textDocument: vscode.TextDocument, range: vscode.Range) {
   let startLine = range.start.line,
       endLine = range.end.line
@@ -199,7 +202,7 @@ export function getSRTDialogueLine(textDocument: vscode.TextDocument, range: vsc
   let dialogueStartNumber = 0,
       dialogueEndNumber = 0
 
-  while (startLineText) {
+  while (startLineText && (startLine < endLine - 2)) {
     startLine++
     startLineText = textDocument.lineAt(startLine).text
   }
@@ -214,7 +217,7 @@ export function getSRTDialogueLine(textDocument: vscode.TextDocument, range: vsc
   dialogueEndNumber = parseInt(textDocument.lineAt(endLine + 1).text)
 
   return {
-    start: isNaN(dialogueStartNumber) ? dialogueEndNumber : dialogueStartNumber,
+    start: isNaN(dialogueStartNumber) ? dialogueEndNumber - 1 : dialogueStartNumber,
     end: dialogueEndNumber
   }
 }

@@ -21,7 +21,10 @@ export function extractSrtInfo (input: string) {
 
     const fields = line.split(/\n/)
     if (fields.length < MIN_EVENT_FIELD_NUM) {
-      console.error('Invalid srt dialogue:', fields)
+      const fieldsStr = fields.map(text => text.trim()).join('')
+      if (fieldsStr) {
+        console.error('Invalid srt dialogue:', fields)
+      }
       continue
     }
 

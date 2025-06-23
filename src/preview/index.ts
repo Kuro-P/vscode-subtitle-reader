@@ -199,7 +199,8 @@ export async function updateContent(panel: Panel, textDocument: vscode.TextDocum
  */
 export function getSRTDialogueLine(textDocument: vscode.TextDocument, range: vscode.Range) {
   let startLine = range.start.line,
-      endLine = range.end.line
+      endLine = range.end.line,
+      totalLine = textDocument.lineCount
 
   let startLineText = textDocument.lineAt(startLine).text,
       endLineText = textDocument.lineAt(endLine).text
@@ -218,8 +219,8 @@ export function getSRTDialogueLine(textDocument: vscode.TextDocument, range: vsc
     endLineText = textDocument.lineAt(endLine).text
   }
 
-  dialogueStartNumber = parseInt(textDocument.lineAt(startLine + 1).text) - 1
-  dialogueEndNumber = parseInt(textDocument.lineAt(endLine + 1).text)
+  dialogueStartNumber = parseInt(textDocument.lineAt(Math.min(startLine + 1, totalLine - 1)).text) - 1
+  dialogueEndNumber = parseInt(textDocument.lineAt(Math.min(endLine + 1, totalLine - 1)).text)
 
   return {
     start: isNaN(dialogueStartNumber) ? dialogueEndNumber - 1 : dialogueStartNumber,

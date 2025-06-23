@@ -1,6 +1,6 @@
 @use './tools.scss' as tools;
 
-body {
+.content {
   @include tools.background-color(#242039, #fafafa);
 }
 

@@ -34,4 +34,24 @@ Support for both light and dark GitHub themes.
 - `subtitleReader.showDialogueLineNumber`: Display line number of dialogues.
 - `subtitleReader.style`: Custom style for the reader panel.
 
+### Settings
+```json
+// settings.json
+{
+  ...,
+  "subtitleReader": {
+    "style": {
+      "html": {
+        "background": "purple"
+      },
+       ".content[data-lang-primary='primary'] .primary-text": {
+        "font-size": "30px"
+      },
+      ".content[data-lang-primary='primary'] .secondary-text": {
+        "font-size": "20px"
+      }
+    }
+  }
+}
+```
 

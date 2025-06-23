@@ -1,5 +1,9 @@
 @use './tools.scss' as tools;
 
+body {
+  @include tools.background-color(#242039, #fafafa);
+}
+
 .file-name {
   font-size: 22px;
   font-weight: bolder;
@@ -19,7 +23,7 @@
   padding: 4px 10px;
   border-radius: 6px;
   @include tools.color(rgba(#fff, 0.75), rgba(#5046E6, 0.75));
-  @include tools.background-color(rgba(#A299F9, 0.15), rgba(#F0EAFF, 0.75));
+  @include tools.background-color(rgba(#A299F9, 0.15), rgba(#F0EAFF, 0.6));
   &:hover {
     @include tools.background-color(rgba(#A299F9, 0.10), rgba(#F0EAFF, 1));
   }

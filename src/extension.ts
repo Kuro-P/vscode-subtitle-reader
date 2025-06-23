@@ -3,11 +3,11 @@ import * as path from 'path'
 import { displayPreviewPanel, updateContent, getSRTDialogueLine } from './preview'
 import { isSubtitleFile, getFileName, processingStyle, isASS, isSRT } from './common/utils'
 import State from './type/state'
+import Configuration from './preview/configuration'
 
 export let context: vscode.ExtensionContext
 export let state: State
 export let configuration: Configuration
-import Configuration from './preview/configuration'
 
 export function activate(c: vscode.ExtensionContext) {
 	context = c

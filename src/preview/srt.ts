@@ -11,9 +11,10 @@ export class Srt {
 
 export const MIN_EVENT_FIELD_NUM = 3
 
-export function extractSrtInfo (input: string) {
-  // split with emplty line
-  const lines = input.split(/\n\n/)
+export function extractSrtInfo (input: string): Srt {
+  // compatible with both Windows (CRLF) \r\n and macOS/Linux (LF) \n
+  // use `od -c <filename>` comand to output file invisible symbol  
+  const lines = input.split(/\r?\n\r?\n/)
   const srtInstance = new Srt()
 
   for (let i = 0; i < lines.length; i++) {
@@ -21,7 +22,10 @@ export function extractSrtInfo (input: string) {
 
     const fields = line.split(/\n/)
     if (fields.length < MIN_EVENT_FIELD_NUM) {
-      console.error('Invalid srt dialogue:', fields)
+      const fieldsStr = fields.map(text => text.trim()).join('')
+      if (fieldsStr) {
+        console.error('Invalid srt dialogue:', fields)
+      }
       continue
     }
 

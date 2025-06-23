@@ -19,8 +19,8 @@ export class Ass {
 }
 
 
-export function extractAssInfo (input: string) {
-  const lines = input.split('\n')
+export function extractAssInfo (input: string): Ass {
+  const lines = input.split(/\r?\n/)
   const assInstance = new Ass()
 
   let curSection: 'scriptInfo' | 'styleInfo' | 'eventsInfo' | undefined
@@ -32,7 +32,6 @@ export function extractAssInfo (input: string) {
 
     // empty line
     if (!line || line.trim() === '') {
-      curSection = undefined
       continue
     }
 

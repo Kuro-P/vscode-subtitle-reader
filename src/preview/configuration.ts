@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
 
-
+// Current Config: style、autoOpen、autoClose、showDialogueLineNumber
 class Configuration {
   protected _configuration?: vscode.WorkspaceConfiguration
 

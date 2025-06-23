@@ -2,9 +2,9 @@ import * as vscode from 'vscode'
 import { isSSA, isASS, isSRT, getFileName } from '../common/utils'
 import * as path from 'path'
 import { isDev, DEV_PORT } from '../../build/const'
-import { promises as fsPromises } from "fs"
+import { promises as fsPromises, unwatchFile } from "fs"
 import { extractAssInfo, extractAssInfoFromLine, Ass } from './ass'
-import { extractSrtInfo, extractSrtInfoFromLine } from './srt'
+import { extractSrtInfo, extractSrtInfoFromLine, Srt } from './srt'
 import * as Handlebars from 'handlebars'
 import { Panel } from './panel'
 import { context, state, configuration } from './../extension'
@@ -72,7 +72,7 @@ export async function generateHTML(webviewPanel: vscode.WebviewPanel, textDocume
   const fileText = document.getText()
   const fileName = getFileName(document.fileName)
   const languageId = document.languageId
-  let contentInstance: any
+  let contentInstance: Ass | Srt | undefined = undefined
 
   if (isSSA(languageId) || isASS(languageId)) {
     contentInstance = extractAssInfo(fileText)
@@ -83,7 +83,7 @@ export async function generateHTML(webviewPanel: vscode.WebviewPanel, textDocume
     return '<h3>请检查文件格式是否正确</h3>'
   }
 
-  // record ass field format info
+  // record field format info
   state.setContentInstance(contentInstance)
 
   // generate webview HTML
@@ -95,15 +95,20 @@ export async function generateHTML(webviewPanel: vscode.WebviewPanel, textDocume
     )
     const styleUri = webviewPanel.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'dist', 'main.css'))
     const scriptUri = webviewPanel.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'dist', 'main.js'))
-    const showDialogueLineNumber = configuration.get('showDialogueLineNumber')
+    const showDialogueLineNumber = configuration.get('showDialogueLineNumber') as boolean
 
-    let panelParams = Object.assign({}, contentInstance, {
+    type PanelParamsType = {
+      fileName: string,
+      styleUri: vscode.Uri | string,
+      scriptUri: vscode.Uri | string,
+      showDialogueLineNumber: boolean,
+    } & typeof contentInstance
+
+    let panelParams : PanelParamsType = Object.assign({}, contentInstance, {
       fileName,
       styleUri,
       scriptUri,
       showDialogueLineNumber,
-      // cspSource: webviewPanel.webview.cspSource,
-      // nonce: getNonce(),
     })
 
     if (isDev) {
@@ -189,9 +194,13 @@ export async function updateContent(panel: Panel, textDocument: vscode.TextDocum
   })
 }
 
+/**
+ * .srt files use subtitle index numbers to identify panel view line counts.
+ */
 export function getSRTDialogueLine(textDocument: vscode.TextDocument, range: vscode.Range) {
   let startLine = range.start.line,
-      endLine = range.end.line
+      endLine = range.end.line,
+      totalLine = textDocument.lineCount
 
   let startLineText = textDocument.lineAt(startLine).text,
       endLineText = textDocument.lineAt(endLine).text
@@ -199,7 +208,7 @@ export function getSRTDialogueLine(textDocument: vscode.TextDocument, range: vsc
   let dialogueStartNumber = 0,
       dialogueEndNumber = 0
 
-  while (startLineText) {
+  while (startLineText && (startLine < endLine - 2)) {
     startLine++
     startLineText = textDocument.lineAt(startLine).text
   }
@@ -210,11 +219,11 @@ export function getSRTDialogueLine(textDocument: vscode.TextDocument, range: vsc
     endLineText = textDocument.lineAt(endLine).text
   }
 
-  dialogueStartNumber = parseInt(textDocument.lineAt(startLine + 1).text) - 1
-  dialogueEndNumber = parseInt(textDocument.lineAt(endLine + 1).text)
+  dialogueStartNumber = parseInt(textDocument.lineAt(Math.min(startLine + 1, totalLine - 1)).text) - 1
+  dialogueEndNumber = parseInt(textDocument.lineAt(Math.min(endLine + 1, totalLine - 1)).text)
 
   return {
-    start: isNaN(dialogueStartNumber) ? dialogueEndNumber : dialogueStartNumber,
+    start: isNaN(dialogueStartNumber) ? dialogueEndNumber - 1 : dialogueStartNumber,
     end: dialogueEndNumber
   }
 }

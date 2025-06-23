@@ -3,11 +3,11 @@ import * as path from 'path'
 import { displayPreviewPanel, updateContent, getSRTDialogueLine } from './preview'
 import { isSubtitleFile, getFileName, processingStyle, isASS, isSRT } from './common/utils'
 import State from './type/state'
+import Configuration from './preview/configuration'
 
 export let context: vscode.ExtensionContext
 export let state: State
 export let configuration: Configuration
-import Configuration from './preview/configuration'
 
 export function activate(c: vscode.ExtensionContext) {
 	context = c
@@ -133,7 +133,7 @@ export function activate(c: vscode.ExtensionContext) {
 		updateContent(panel, document, contentChanges.map(changeEvent => changeEvent.range))
 	})
 
-	// document scroll
+	// document scroll sync to webview
 	const onDidChangeTextEditorVisibleRanges = vscode.window.onDidChangeTextEditorVisibleRanges((event: vscode.TextEditorVisibleRangesChangeEvent) => {
 		const { textEditor: { document }, visibleRanges } = event
 		const panel = state.getPanel()
@@ -147,9 +147,11 @@ export function activate(c: vscode.ExtensionContext) {
 		}
 
 		if (isASS(document.languageId)) {
+			// .ass file only consider [Events] section map to panel
 			panel.syncScroll(visibleRanges[0]?.start.line, visibleRanges[0]?.end.line)
 		} else if (isSRT(document.languageId)) {
 			try {
+				// .srt file use the full document map to view
 				const srtLine = getSRTDialogueLine(document, visibleRanges[0])
 				panel.syncScroll(srtLine.start, srtLine.end)
 			} catch (e: any) {

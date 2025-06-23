@@ -2,9 +2,9 @@ import * as vscode from 'vscode'
 import { isSSA, isASS, isSRT, getFileName } from '../common/utils'
 import * as path from 'path'
 import { isDev, DEV_PORT } from '../../build/const'
-import { promises as fsPromises } from "fs"
+import { promises as fsPromises, unwatchFile } from "fs"
 import { extractAssInfo, extractAssInfoFromLine, Ass } from './ass'
-import { extractSrtInfo, extractSrtInfoFromLine } from './srt'
+import { extractSrtInfo, extractSrtInfoFromLine, Srt } from './srt'
 import * as Handlebars from 'handlebars'
 import { Panel } from './panel'
 import { context, state, configuration } from './../extension'
@@ -72,7 +72,7 @@ export async function generateHTML(webviewPanel: vscode.WebviewPanel, textDocume
   const fileText = document.getText()
   const fileName = getFileName(document.fileName)
   const languageId = document.languageId
-  let contentInstance: any
+  let contentInstance: Ass | Srt | undefined = undefined
 
   if (isSSA(languageId) || isASS(languageId)) {
     contentInstance = extractAssInfo(fileText)
@@ -83,7 +83,7 @@ export async function generateHTML(webviewPanel: vscode.WebviewPanel, textDocume
     return '<h3>请检查文件格式是否正确</h3>'
   }
 
-  // record ass field format info
+  // record field format info
   state.setContentInstance(contentInstance)
 
   // generate webview HTML
@@ -95,15 +95,20 @@ export async function generateHTML(webviewPanel: vscode.WebviewPanel, textDocume
     )
     const styleUri = webviewPanel.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'dist', 'main.css'))
     const scriptUri = webviewPanel.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'dist', 'main.js'))
-    const showDialogueLineNumber = configuration.get('showDialogueLineNumber')
+    const showDialogueLineNumber = configuration.get('showDialogueLineNumber') as boolean
 
-    let panelParams = Object.assign({}, contentInstance, {
+    type PanelParamsType = {
+      fileName: string,
+      styleUri: vscode.Uri | string,
+      scriptUri: vscode.Uri | string,
+      showDialogueLineNumber: boolean,
+    } & typeof contentInstance
+
+    let panelParams : PanelParamsType = Object.assign({}, contentInstance, {
       fileName,
       styleUri,
       scriptUri,
       showDialogueLineNumber,
-      // cspSource: webviewPanel.webview.cspSource,
-      // nonce: getNonce(),
     })
 
     if (isDev) {

@@ -30,34 +30,34 @@
 			"outFiles": [
 				"${workspaceFolder}/dist/**/*.js"
 			],
-			"preLaunchTask": "Dev All"
+			"preLaunchTask": "Dev All",
 		},
-		{
-			"name": "Run Dev Extension",
-			"type": "extensionHost",
-			"request": "launch",
-			"runtimeExecutable": "${execPath}",
-			"args": [
-				"${workspaceRoot}/testFiles",
-				"--extensionDevelopmentPath=${workspaceFolder}"
-			],
-			"outFiles": [
-				"${workspaceFolder}/dist/**/*.js"
-			],
-			"preLaunchTask": "Dev Extension"
-		},
-		{
-			"name": "Run Build Extension",
-			"type": "extensionHost",
-			"request": "launch",
-			"args": [
-				"${workspaceRoot}/testFiles",
-				"--extensionDevelopmentPath=${workspaceFolder}",
-			],
-			"outFiles": [
-				"${workspaceFolder}/dist/**/*.js"
-			],
-			"preLaunchTask": "Build Extension"
-		}
+		// {
+		// 	"name": "Run Dev Extension",
+		// 	"type": "extensionHost",
+		// 	"request": "launch",
+		// 	"runtimeExecutable": "${execPath}",
+		// 	"args": [
+		// 		"${workspaceRoot}/testFiles",
+		// 		"--extensionDevelopmentPath=${workspaceFolder}"
+		// 	],
+		// 	"outFiles": [
+		// 		"${workspaceFolder}/dist/**/*.js"
+		// 	],
+		// 	"preLaunchTask": "Dev Extension"
+		// },
+		// {
+		// 	"name": "Run Build Extension",
+		// 	"type": "extensionHost",
+		// 	"request": "launch",
+		// 	"args": [
+		// 		"${workspaceRoot}/testFiles",
+		// 		"--extensionDevelopmentPath=${workspaceFolder}",
+		// 	],
+		// 	"outFiles": [
+		// 		"${workspaceFolder}/dist/**/*.js"
+		// 	],
+		// 	"preLaunchTask": "Build Extension"
+		// }
 	]
 }

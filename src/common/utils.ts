@@ -1,4 +1,5 @@
 import { FIleType } from '../type/file'
+import { env } from 'vscode'
 
 export function isSSA(filePath: string) {
   return filePath.endsWith(FIleType.SSA)
@@ -96,3 +97,8 @@ export function processingStyle(style: StyleConfig): string {
 
   return cssStr
 }
+
+export function platformIsWindows() {
+  return Boolean(env.appRoot && env.appRoot[0] !== "/")
+}
+

@@ -1,5 +1,5 @@
 import * as vscode from 'vscode'
-import { isSSA, isASS, isSRT, getFileName } from '../common/utils'
+import { isSSA, isASS, isSRT, getFileName, platformIsWindows } from '../common/utils'
 import * as path from 'path'
 import { isDev, DEV_PORT } from '../../build/const'
 import { promises as fsPromises, unwatchFile } from "fs"
@@ -96,6 +96,7 @@ export async function generateHTML(webviewPanel: vscode.WebviewPanel, textDocume
     const styleUri = webviewPanel.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'dist', 'main.css'))
     const scriptUri = webviewPanel.webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, 'dist', 'main.js'))
     const showDialogueLineNumber = configuration.get('showDialogueLineNumber') as boolean
+    const isWindows = platformIsWindows()
 
     type PanelParamsType = {
       fileName: string,
@@ -109,6 +110,7 @@ export async function generateHTML(webviewPanel: vscode.WebviewPanel, textDocume
       styleUri,
       scriptUri,
       showDialogueLineNumber,
+      isWindows
     })
 
     if (isDev) {

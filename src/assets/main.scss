@@ -104,3 +104,7 @@
     @extend %primary-text;
   }
 }
+
+.content[data-platform-is-windows="true"] {
+  font-family: "Microsoft YaHei", var(--vscode-editor-font-family), sans-serif;
+}
